@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>345291792806-4l89p8qsdkuhegnu1ps32mjvo3lapvok.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.345291792806-4l89p8qsdkuhegnu1ps32mjvo3lapvok</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBKxPd8CgvCAJLFj6MeOWzw264YX2iq2SE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>345291792806</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.zerosoda</string>
+	<key>PROJECT_ID</key>
+	<string>zerosoda-fa900</string>
+	<key>STORAGE_BUCKET</key>
+	<string>zerosoda-fa900.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:345291792806:ios:caf508726c14a7cb19af67</string>
+</dict>
+</plist>
