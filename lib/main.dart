@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter_application_1/style/font.dart';
 import 'screen/onboarding.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:custom_splash/custom_splash.dart';
@@ -21,11 +20,11 @@ class MyApp extends StatelessWidget {
       home: CustomSplash(
         imagePath: 'assets/LOGO.jpg',
         backGroundColor: Colors.white,
-        animationEffect:'zoom-in',
+        animationEffect: 'zoom-in',
         logoSize: 400,
-        home: IntroScreen(),      
+        home: IntroScreen(),
         duration: 4000,
-        type:  CustomSplashType.StaticDuration,
+        type: CustomSplashType.StaticDuration,
       ),
     );
   }
@@ -80,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                             ))),
                         child: Text(
                           '프로필 생성하기',
-                         // style: buttonStyle(),
+                          // style: buttonStyle(),
                         )),
                   ),
                 ],
