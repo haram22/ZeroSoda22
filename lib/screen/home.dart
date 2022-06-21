@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 //import 'package:flutter_application_1/style/font.dart';
 import '../calandar/calanar.dart';
@@ -196,13 +197,22 @@ class _MainHomePageState extends State<MainHomePage> {
                                                   ),
                                                 ),
                                                 TextButton(
-                                                  onPressed: () {
+                                                  onPressed: () async{
                                                     Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
                                                               (CalendarPage())),
                                                     );
+                                                    await FirebaseFirestore.instance.collection('product').doc('${_count}').set({
+                                                      'number' : _count.toString()
+                                                    }).whenComplete(() {
+                                                      print('pruduct add');
+                                                       Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(builder: (context) => CalendarPage()),
+                                                          );
+                                                          });
                                                   },
                                                   style: ElevatedButton
                                                       .styleFrom(),
@@ -213,7 +223,7 @@ class _MainHomePageState extends State<MainHomePage> {
                                           ));
                                 },
                                 child: Container(
-                                  width: 68,
+                                  width: 80,
                                   height: 18,
                                   child: Center(
                                     child: Text(

@@ -49,7 +49,7 @@ class IntroScreenState extends State<IntroScreen> {
     );
     slides.add(
       new Slide(
-        backgroundImage: "assets/Onboarding5.png",
+        backgroundImage: "assets/Onboarding_Full5.png",
         backgroundOpacity: 0,
       ),
     );
