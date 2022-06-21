@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screen/onboarding.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:custom_splash/custom_splash.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() {
   runApp(const MyApp());
