@@ -1,10 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:zerosoda/main.dart';
 //import 'package:flutter_application_1/screen/home.dart';
 import '../calandar/calanar.dart';
 import '../style/font.dart';
 import 'package:zerosoda/entrance/profileEdit.dart';
+import '../screen/home.dart';
+
 void main() async {
   runApp(ProfileForm());
 }
@@ -147,7 +148,7 @@ class _ProfileFormState extends State<ProfileForm> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomePage()),
+                                  builder: (context) => MainPage()),
                             );
                             ProfileForm();
                           }
@@ -248,7 +249,7 @@ class _ProfileFormState extends State<ProfileForm> {
 
   int? _value = 0;
   List<String> role = ['개발자', '디자이너'];
-  Widget myRole(){
+  Widget myRole() {
     return Row(
       children: [
         Wrap(
