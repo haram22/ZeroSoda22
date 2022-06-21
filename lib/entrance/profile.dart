@@ -170,7 +170,7 @@ class _ProfileFormState extends State<ProfileForm> {
                                     side:
                                         BorderSide(color: Color(0xff007AB5))))),
                         child: Text(
-                          '시작하기ㄴㄴ',
+                          '시작하기',
                           style: buttonStyle(color: Colors.white),
                         ),
                       ),
