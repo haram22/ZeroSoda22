@@ -4,12 +4,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import '../style/font.dart';
 
 //import 'package:flutter_application_1/style/font.dart';
 import '../calandar/calanar.dart';
-
-void main() => runApp(const MainPage());
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -74,11 +72,10 @@ class _MainHomePageState extends State<MainHomePage> {
                                       children: [
                                         Text(
                                           '참여하기',
-                                      //    style: titleStyle(),
+                                          style: titleStyle(),
                                         ),
                                         Text('팀장에게 공유받은 참여코드를 입력해주세요.',
-                                         //   style: smallTextStyle()
-                                          ),
+                                            style: smallTextStyle()),
                                         Container(
                                             margin: EdgeInsets.only(
                                                 top: 20, bottom: 20),
@@ -109,7 +106,7 @@ class _MainHomePageState extends State<MainHomePage> {
                                               child: Center(
                                                   child: Text(
                                                 '확인',
-                                               // style: smallTextStyle(),
+                                                style: smallTextStyle(),
                                               ))),
                                         )
                                       ],
@@ -147,14 +144,13 @@ class _MainHomePageState extends State<MainHomePage> {
                               ),
                             ),
                             child: TextButton(
-
-                                // style: ButtonStyle(
-                                //     shape:
-                                //         MaterialStateProperty.all<RoundedRectangleBorder>(
-                                //             RoundedRectangleBorder(
-                                //   borderRadius: BorderRadius.circular(30),
-                                //   //side: BorderSide(color: Colors.red)
-                                // ))),
+                                style: ButtonStyle(
+                                    shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  //side: BorderSide(color: Colors.red)
+                                ))),
                                 onPressed: () {
                                   randomNumber();
                                   showDialog(
@@ -197,22 +193,13 @@ class _MainHomePageState extends State<MainHomePage> {
                                                   ),
                                                 ),
                                                 TextButton(
-                                                  onPressed: () async{
+                                                  onPressed: () {
                                                     Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
                                                               (CalendarPage())),
                                                     );
-                                                    await FirebaseFirestore.instance.collection('product').doc('${_count}').set({
-                                                      'number' : _count.toString()
-                                                    }).whenComplete(() {
-                                                      print('pruduct add');
-                                                       Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(builder: (context) => CalendarPage()),
-                                                          );
-                                                          });
                                                   },
                                                   style: ElevatedButton
                                                       .styleFrom(),
@@ -223,13 +210,13 @@ class _MainHomePageState extends State<MainHomePage> {
                                           ));
                                 },
                                 child: Container(
-                                  width: 80,
+                                  width: 68,
                                   height: 18,
                                   child: Center(
                                     child: Text(
                                       '참여코드 만들기',
-                                      //style: smallTextStyle(
-                                         // color: Color(0xff6D6D6D)),
+                                      style: smallTextStyle(
+                                          color: Color(0xff6D6D6D)),
                                     ),
                                   ),
                                 )),
@@ -263,17 +250,16 @@ Widget HelloText() {
       children: [
         Row(
           children: [
-            Text('박정규', //style: titleStyle()
-            ),
+            Text('', style: titleStyle()),
             Text(
               '님,',
-             // style: subtitleStyle(),
+              style: subtitleStyle(),
             )
           ],
         ),
         Text(
           'ZERO SODA와 함께 즐거운 팀플 시간 되세요!',
-          //style: smallTextStyle(),
+          style: smallTextStyle(),
         )
       ],
     ),

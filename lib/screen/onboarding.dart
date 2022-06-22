@@ -5,9 +5,9 @@ import 'package:intro_slider/dot_animation_enum.dart';
 import 'package:intro_slider/slide_object.dart';
 import 'package:intro_slider/scrollbar_behavior_enum.dart';
 import 'package:zerosoda/entrance/profile.dart';
-//import 'package:intro_slider_example/home.dart';
-
-void main() => runApp(IntroScreen());
+// import '../google/testgoogle.dart';
+// import '../google/whygoogle.dart';
+import '../google/google.dart';
 
 class IntroScreen extends StatefulWidget {
   IntroScreen({Key? key}) : super(key: key);
@@ -58,7 +58,7 @@ class IntroScreenState extends State<IntroScreen> {
   void onDonePress() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ProfileForm()),
+      MaterialPageRoute(builder: (context) => SignIn()),
     );
   }
 
