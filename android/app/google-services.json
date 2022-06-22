@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "345291792806",
+    "project_id": "zerosoda-fa900",
+    "storage_bucket": "zerosoda-fa900.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:345291792806:android:44ae19c09946a0de19af67",
+        "android_client_info": {
+          "package_name": "com.example.zerosoda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "345291792806-qdjmrmhktb9i495bju2tn0lqn5i1gjf6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyOKxSXVOsQuD1lgrhJGlfHKNzQEaC9cQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "345291792806-qdjmrmhktb9i495bju2tn0lqn5i1gjf6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "345291792806-4l89p8qsdkuhegnu1ps32mjvo3lapvok.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.zerosoda"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

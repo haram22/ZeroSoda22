@@ -179,7 +179,7 @@ class _CalendarPageState extends State<CalendarPage> {
             Stack(
               children: [
                 Center(
-                  child: Image.asset('assets/Timetable.png', width: 343),
+                  child: Image.asset('assets/timeTable.png', width: 343),
                 ),
                 Container(
                     width: 359,
