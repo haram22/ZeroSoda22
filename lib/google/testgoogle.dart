@@ -1,23 +1,39 @@
-import 'package:flutter/material.dart';
-import 'package:zerosoda/main.dart';
-//import 'package:flutter_application_1/screen/home.dart';
-import '../calandar/calanar.dart';
-import '../style/font.dart';
-import 'package:zerosoda/entrance/profileEdit.dart';
+// Copyright 2013 The Flutter Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// ignore_for_file: public_member_api_docs
+
+import 'dart:async';
+import 'dart:convert' show json;
 import '../screen/home.dart';
+import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
+import '../style/font.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-void main() async {
-  runApp(ProfileForm());
-}
+GoogleSignIn _googleSignIn = GoogleSignIn(
+  // Optional clientId
+  // clientId: '479882132969-9i9aqik3jfjd7qhci1nqf0bm2g71rm1u.apps.googleusercontent.com',
+  scopes: <String>[
+    'email',
+    'https://www.googleapis.com/auth/contacts.readonly',
+  ],
+);
 
-class ProfileForm extends StatefulWidget {
+class SignIn extends StatefulWidget {
+  const SignIn({Key? key}) : super(key: key);
+
   @override
-  _ProfileFormState createState() => _ProfileFormState();
+  State createState() => SignInState();
 }
 
 enum Value { developer, designer }
 
-class _ProfileFormState extends State<ProfileForm> {
+class SignInState extends State<SignIn> {
   final TextEditingController idController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   FocusNode inputNode = FocusNode();
@@ -28,26 +44,59 @@ class _ProfileFormState extends State<ProfileForm> {
   final _formKey = GlobalKey<FormState>();
   bool buttonenabled = false;
   int count = 0;
+  GoogleSignInAccount? _currentUser;
+  String _contactText = '';
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0.0,
-        title: Text('프로필', style: titleStyle(color: Colors.black)),
-      ),
-      body: Center(
+  void initState() {
+    super.initState();
+    _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? account) {
+      setState(() {
+        _currentUser = account;
+      });
+      if (_currentUser != null) {
+        signInWithGoogle();
+      }
+    });
+    _googleSignIn.signInSilently();
+  }
+
+  Future<UserCredential> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      //GoogleSignInAccount user;
+      final http.Response response = await http.get(
+        Uri.parse('https://people.googleapis.com/v1/people/me/connections'
+            '?requestMask.includeField=person.names'),
+        //headers: await user.authHeaders,
+      );
+      print("success");
+    } catch (error) {
+      print(error);
+    }
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential();
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
+  Future<void> _handleSignOut() => _googleSignIn.disconnect();
+
+  Widget _buildBody() {
+    final GoogleSignInAccount? user = _currentUser;
+    if (user != null) {
+      return Center(
         child: Stack(
           children: [
-            // Align(
-            //   alignment: Alignment.topCenter,
-            //   child: Padding(
-            //     padding: const EdgeInsets.only(top: 300),
-            //     child: Image.asset('assets/backgroundfinal.png'),
-            //   ),
-            // ),
             Stack(
               children: [
                 Padding(
@@ -150,7 +199,6 @@ class _ProfileFormState extends State<ProfileForm> {
                               MaterialPageRoute(
                                   builder: (context) => MainPage()),
                             );
-                            ProfileForm();
                           }
                         },
                         style: ButtonStyle(
@@ -170,7 +218,7 @@ class _ProfileFormState extends State<ProfileForm> {
                                     side:
                                         BorderSide(color: Color(0xff007AB5))))),
                         child: Text(
-                          '시작하기',
+                          '시작하기ㄴㄴ',
                           style: buttonStyle(color: Colors.white),
                         ),
                       ),
@@ -178,11 +226,37 @@ class _ProfileFormState extends State<ProfileForm> {
                   ),
                 ),
               ],
-            )
+            ),
+            ElevatedButton(
+              onPressed: _handleSignOut,
+              child: const Text('SIGN OUT'),
+            ),
           ],
         ),
-      ),
-    );
+      );
+    } else {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          ElevatedButton(
+            onPressed: signInWithGoogle,
+            child: const Text('SIGN IN'),
+          ),
+        ],
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Google Sign In'),
+        ),
+        body: ConstrainedBox(
+          constraints: const BoxConstraints.expand(),
+          child: _buildBody(),
+        ));
   }
 
   Widget nameTextFormField(String name, TextEditingController controller) {
