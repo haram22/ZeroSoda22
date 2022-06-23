@@ -1,31 +1,22 @@
-import 'dart:async';
-import 'dart:developer';
-import 'dart:ffi';
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:zerosoda/entrance/profile.dart';
+import 'package:zerosoda/google/google.dart';
 import '../style/font.dart';
-
 //import 'package:flutter_application_1/style/font.dart';
 import '../calandar/calanar.dart';
-import '../style/font.dart';
 
 class MainPage extends StatelessWidget {
-  
   const MainPage({Key? key}) : super(key: key);
 
   static const String _title = 'Home';
-  
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
       title: _title,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -203,17 +194,23 @@ class _MainHomePageState extends State<MainHomePage> {
                                                   ),
                                                 ),
                                                 TextButton(
-
-                                                  onPressed: () async{
-                                                    await FirebaseFirestore.instance.collection('RoomN').doc('${_count}').set({
-                                                      'number' : _count.toString()
+                                                  onPressed: () async {
+                                                    await FirebaseFirestore
+                                                        .instance
+                                                        .collection('RoomN')
+                                                        .doc('${_count}')
+                                                        .set({
+                                                      'number':
+                                                          _count.toString()
                                                     }).whenComplete(() {
                                                       print('RoomN add');
-                                                       Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(builder: (context) => CalendarPage()),
-                                                          );
-                                                          });
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                CalendarPage()),
+                                                      );
+                                                    });
                                                   },
                                                   style: ElevatedButton
                                                       .styleFrom(),
@@ -230,9 +227,7 @@ class _MainHomePageState extends State<MainHomePage> {
                                     child: Text(
                                       '참여코드 만들기',
                                       style: smallTextStyle(
-
-                                         color: Color(0xff6D6D6D)),
-
+                                          color: Color(0xff6D6D6D)),
                                     ),
                                   ),
                                 )),
@@ -266,7 +261,7 @@ Widget HelloText() {
       children: [
         Row(
           children: [
-            Text(Provider.of<aboutuser>().name, style: titleStyle()),
+            Text(aboutuser().name, style: titleStyle()),
             Text(
               '님,',
               style: subtitleStyle(),

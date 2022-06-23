@@ -1,6 +1,8 @@
 //real
 import 'dart:async';
 import 'dart:convert' show json;
+import 'package:provider/provider.dart';
+
 import '../screen/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -10,11 +12,14 @@ import '../style/font.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class aboutuser extends ChangeNotifier {
-  final String name;
-  final String id;
+final TextEditingController idController = TextEditingController();
+final TextEditingController nameController = TextEditingController();
 
-  aboutuser({required this.name, required this.id});
+class aboutuser extends ChangeNotifier {
+  final String name = idController.text;
+  final String id = nameController.text;
+
+  notifyListeners();
 }
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -34,8 +39,6 @@ class SignIn extends StatefulWidget {
 enum Value { developer, designer }
 
 class SignInState extends State<SignIn> {
-  final TextEditingController idController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
   FocusNode inputNode = FocusNode();
   void openKeyboard() {
     FocusScope.of(context).requestFocus(inputNode);
@@ -93,151 +96,164 @@ class SignInState extends State<SignIn> {
   Widget _buildBody() {
     final GoogleSignInAccount? user = _currentUser;
     if (user != null) {
-      return Center(
-        child: Stack(
-          children: [
-            Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 24, right: 24),
-                  child: Form(
-                    key: _formKey,
-                    child: Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 63,
-                            ),
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 2,
-                                ),
-                                Text(
-                                  '학번',
-                                  style: buttonStyle(color: Color(0xff6D6D6D)),
-                                ),
-                                Spacer()
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            idTextFormField('id', idController),
-                            SizedBox(
-                              height: 34,
-                            ),
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 2,
-                                ),
-                                Text(
-                                  '이름',
-                                  style: buttonStyle(color: Color(0xff6D6D6D)),
-                                ),
-                                Spacer()
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            nameTextFormField('Name', nameController),
-                            SizedBox(
-                              height: 34,
-                            ),
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 2,
-                                ),
-                                Text(
-                                  '역할',
-                                  style: buttonStyle(color: Color(0xff6D6D6D)),
-                                ),
-                                Spacer()
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            myRole(),
-                          ],
+      return Provider(
+        create: (context) => MainPage(),
+        child: Center(
+          child: Stack(
+            children: [
+              Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 24, right: 24),
+                    child: Form(
+                      key: _formKey,
+                      child: Expanded(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 63,
+                              ),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  Text(
+                                    'sss$user 학번ㄴㄴㄴㄴㄴㄴㄴ',
+                                    style:
+                                        buttonStyle(color: Color(0xff6D6D6D)),
+                                  ),
+                                  Spacer()
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              idTextFormField('id', idController),
+                              SizedBox(
+                                height: 34,
+                              ),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  Text(
+                                    '이름',
+                                    style:
+                                        buttonStyle(color: Color(0xff6D6D6D)),
+                                  ),
+                                  Spacer()
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              nameTextFormField('Name', nameController),
+                              SizedBox(
+                                height: 34,
+                              ),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  Text(
+                                    '역할',
+                                    style:
+                                        buttonStyle(color: Color(0xff6D6D6D)),
+                                  ),
+                                  Spacer()
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              myRole(),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            Stack(
-              children: [
-                Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                        child: Image.asset('assets/backgroundfinal.png'))),
-              ],
-            ),
-            Stack(
-              children: [
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      top: 513,
-                    ),
-                    child: Container(
-                      width: 259,
-                      height: 60,
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                           await FirebaseFirestore.instance.collection('User').doc('${user}').set({
-                             'user Email' : user.email,
-                             'user name' : nameController.text,
-                             '학번' : idController.text,
-                             'user' : user
-                           }).whenComplete(() {
-                             print('user add');
-                             Navigator.push(
-                               context, 
-                              MaterialPageRoute(builder: (context) => MainPage())
-                               );
-                           });
-                          }
-                        },
-                        style: ButtonStyle(
-                            shadowColor: MaterialStateProperty.all<Color>(
-                                Colors.transparent),
-                            backgroundColor:
-                                MaterialStateProperty.resolveWith((states) {
-                              if (states.contains(MaterialState.disabled)) {
-                                return Colors.yellow;
-                              }
-                              return Color(0xff007AB5);
-                            }),
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                    side:
-                                        BorderSide(color: Color(0xff007AB5))))),
-                        child: Text(
-                          '시작하기',
-                          style: buttonStyle(color: Colors.white),
+                ],
+              ),
+              Stack(
+                children: [
+                  Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                          child: Image.asset('assets/backgroundfinal.png'))),
+                ],
+              ),
+              Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        top: 513,
+                      ),
+                      child: Container(
+                        width: 259,
+                        height: 60,
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            // if (_formKey.currentState!.validate()) {
+                            //   await FirebaseFirestore.instance
+                            //       .collection('User')
+                            //       .doc('${user}')
+                            //       .set({
+                            //     'user Email': user.email,
+                            //     'user name': nameController.text,
+                            //     '학번': idController.text,
+                            //     'user': user
+                            //   }).whenComplete(() {
+                            //     print('user add');
+                            //     Navigator.push(
+                            //         context,
+                            //         MaterialPageRoute(
+                            //             builder: (context) => MainPage()));
+                            //   });
+                            // }
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MainPage()));
+                          },
+                          style: ButtonStyle(
+                              shadowColor: MaterialStateProperty.all<Color>(
+                                  Colors.transparent),
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith((states) {
+                                if (states.contains(MaterialState.disabled)) {
+                                  return Colors.yellow;
+                                }
+                                return Color(0xff007AB5);
+                              }),
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                      side: BorderSide(
+                                          color: Color(0xff007AB5))))),
+                          child: Text(
+                            '시작하기',
+                            style: buttonStyle(color: Colors.white),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            ElevatedButton(
-              onPressed: _handleSignOut,
-              child: const Text('SIGN OUT'),
-            ),
-          ],
+                ],
+              ),
+              ElevatedButton(
+                onPressed: _handleSignOut,
+                child: const Text('SIGN OUT'),
+              ),
+            ],
+          ),
         ),
       );
     } else {
