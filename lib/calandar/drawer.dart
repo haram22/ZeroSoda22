@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../style/font.dart';
 import 'calanar.dart';
 import '../screen/home.dart';
 import 'dart:math';
-
-void main() => runApp(DrawerPage());
 
 class DrawerPage extends StatelessWidget {
   const DrawerPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    int _count = Random().nextInt(8999) + 1000;
+    //int _count = Random().nextInt(8999) + 1000;
     return Column(
       children: [
         ListTile(
@@ -35,7 +34,7 @@ class DrawerPage extends StatelessWidget {
                       border: Border.all(color: Color(0xffFFC700))),
                   child: Center(
                     child: Text(
-                      '${_count}',
+                      '${code().codenum}sss',
                       style: titleStyle(),
                       textAlign: TextAlign.center,
                     ),
