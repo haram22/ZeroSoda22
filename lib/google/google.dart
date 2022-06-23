@@ -10,6 +10,13 @@ import '../style/font.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+class aboutuser extends ChangeNotifier {
+  final String name;
+  final String id;
+
+  aboutuser({required this.name, required this.id});
+}
+
 GoogleSignIn _googleSignIn = GoogleSignIn(
   scopes: <String>[
     'email',

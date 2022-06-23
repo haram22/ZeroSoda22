@@ -7,6 +7,7 @@ import 'package:intro_slider/scrollbar_behavior_enum.dart';
 import 'package:zerosoda/entrance/profile.dart';
 // import '../google/testgoogle.dart';
 // import '../google/whygoogle.dart';
+import '../calandar/count.dart';
 import '../google/google.dart';
 
 class IntroScreen extends StatefulWidget {
