@@ -234,16 +234,13 @@ class _CalendarPageState extends State<CalendarPage> {
                           return Container(
                             child: GridTile(
                               child: ElevatedButton(
-                                onPressed: () async{
-                                  setState(
-                                    () => calendar.press[index] = !calendar.press[index]);
+                                onPressed: () async {
+                                  setState(() => press[index] = !press[index]);
                                   await FirebaseFirestore.instance
-                                  .collection('CalendarRoom')
-                                  .doc('${code().codenum}')
-                                  .set({
-                                    'Calendar' : press
-                                  }).
-                                  whenComplete(() {
+                                      .collection('CalendarRoom')
+                                      .doc('${code().codenum}')
+                                      .set({'Calendar': press}).whenComplete(
+                                          () {
                                     print('make Scedule');
                                     print('${index}');
                                     print('${press[index]}');
@@ -311,15 +308,16 @@ class icons extends StatelessWidget {
   }
 }
 
-class  Calendar{
+class Calendar {
   List<bool> press;
 
   Calendar({required this.press});
 
   factory Calendar.fromDs(DocumentSnapshot data) {
-    return Calendar(  
+
+    return Calendar(
+
       press: data['Calendar'] ?? '',
     );
   }
 }
-

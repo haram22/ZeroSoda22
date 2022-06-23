@@ -18,16 +18,6 @@ class code extends ChangeNotifier {
   notifyListeners();
 }
 
-// class code extends ChangeNotifier {
-//   int _codenum = 0;
-//   int get codenum => _codenum;
-
-//   void makecode() {
-//     _codenum = Random().nextInt(8999) + 1000;
-//     notifyListeners();
-//   }
-// }
-
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
 
@@ -61,8 +51,6 @@ class MainHomePage extends StatefulWidget {
 
 class _MainHomePageState extends State<MainHomePage> {
   FirebaseAuth auth = FirebaseAuth.instance;
-  //final randomcode = Provider.of<code>(context);
-  //int _count = Random().nextInt(8999) + 1000;
   late code _codeProvider;
 
   @override
@@ -77,7 +65,6 @@ class _MainHomePageState extends State<MainHomePage> {
           child: Container(
             child: Column(
               children: [
-                HelloText(),
                 Container(height: 329, child: Image.asset('assets/Home.png')),
                 Container(
                     margin: EdgeInsets.fromLTRB(34, 0, 34, 0),
@@ -89,12 +76,9 @@ class _MainHomePageState extends State<MainHomePage> {
                         ),
                         ElevatedButton(
                             onPressed: () {
-                              /////////
-                              //_makecode();
                               setState(() {
                                 number = Random().nextInt(8999) + 1000;
                               });
-                              //_codeProvider.makecode();
                               showDialog(
                                 context: context,
                                 builder: (BuildContext content) {
@@ -291,32 +275,4 @@ Widget logoImage() {
     alignment: Alignment.topCenter,
     child: Image.asset('assets/LOGO.jpg'),
   );
-}
-
-Widget HelloText() {
-  return Container(
-    margin: EdgeInsets.fromLTRB(34, 32, 34, 32),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Text(aboutuser().name, style: titleStyle()),
-            Text(
-              '님,',
-              style: subtitleStyle(),
-            )
-          ],
-        ),
-        Text(
-          'ZERO SODA와 함께 즐거운 팀플 시간 되세요!',
-          style: smallTextStyle(),
-        )
-      ],
-    ),
-  );
-}
-
-void randomNumber() {
-  String code = Random().nextInt(9999).toString();
 }
