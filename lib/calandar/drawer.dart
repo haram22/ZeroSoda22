@@ -34,7 +34,7 @@ class DrawerPage extends StatelessWidget {
                       border: Border.all(color: Color(0xffFFC700))),
                   child: Center(
                     child: Text(
-                      '${code().codenum}sss',
+                      '${code().codenum}',
                       style: titleStyle(),
                       textAlign: TextAlign.center,
                     ),
