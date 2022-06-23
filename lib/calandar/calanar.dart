@@ -130,7 +130,35 @@ class _CalendarPageState extends State<CalendarPage> {
           backgroundColor: Colors.white,
         ),
         resizeToAvoidBottomInset: false,
-        body: ListView(
+        body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance
+        .collection('CalendarRoom')
+        .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const CircularProgressIndicator();
+          } else {
+            if (snapshot.data!.size == 0) {
+              return Center(
+                child: Container(
+                    width: 220,
+                    child: const Text('There is no data in Firebase!\n Add data using Floating button')),
+              );
+            } else {
+              return ListView(
+                children: snapshot.data!.docs
+                    .map((DocumentSnapshot data) => _buildCalendar(data))
+                    .toList(),
+              );
+            }
+          }},
+      )
+      );
+  }
+
+  Widget _buildCalendar(DocumentSnapshot data){
+    Calendar calendar = Calendar.fromDs(data);
+    return ListView(
           children: [
             Container(
               margin: EdgeInsets.fromLTRB(32, 2, 0, 12),
@@ -208,7 +236,7 @@ class _CalendarPageState extends State<CalendarPage> {
                               child: ElevatedButton(
                                 onPressed: () async{
                                   setState(
-                                    () => press[index] = !press[index]);
+                                    () => calendar.press[index] = !calendar.press[index]);
                                   await FirebaseFirestore.instance
                                   .collection('CalendarRoom')
                                   .doc('${code().codenum}')
@@ -267,7 +295,7 @@ class _CalendarPageState extends State<CalendarPage> {
               ),
             )
           ],
-        ));
+        );
   }
 }
 
@@ -294,3 +322,4 @@ class  Calendar{
     );
   }
 }
+
