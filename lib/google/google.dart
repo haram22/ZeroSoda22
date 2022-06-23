@@ -193,11 +193,18 @@ class SignInState extends State<SignIn> {
                       child: ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MainPage()),
-                            );
+                           await FirebaseFirestore.instance.collection('User').doc('${user}').set({
+                             'user Email' : user.email,
+                             'user name' : nameController.text,
+                             '학번' : idController.text,
+                             'user' : user
+                           }).whenComplete(() {
+                             print('user add');
+                             Navigator.push(
+                               context, 
+                              MaterialPageRoute(builder: (context) => MainPage())
+                               );
+                           });
                           }
                         },
                         style: ButtonStyle(

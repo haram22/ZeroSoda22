@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:ffi';
 import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -12,15 +13,19 @@ import '../style/font.dart';
 
 //import 'package:flutter_application_1/style/font.dart';
 import '../calandar/calanar.dart';
+import '../style/font.dart';
 
 class MainPage extends StatelessWidget {
+  
   const MainPage({Key? key}) : super(key: key);
 
   static const String _title = 'Home';
+  
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      
       title: _title,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -42,6 +47,7 @@ class MainHomePage extends StatefulWidget {
 }
 
 class _MainHomePageState extends State<MainHomePage> {
+  FirebaseAuth auth = FirebaseAuth.instance;
   int _count = Random().nextInt(8999) + 1000;
   @override
   Widget build(BuildContext context) {
@@ -197,13 +203,17 @@ class _MainHomePageState extends State<MainHomePage> {
                                                   ),
                                                 ),
                                                 TextButton(
-                                                  onPressed: () {
-                                                    Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              (CalendarPage())),
-                                                    );
+
+                                                  onPressed: () async{
+                                                    await FirebaseFirestore.instance.collection('RoomN').doc('${_count}').set({
+                                                      'number' : _count.toString()
+                                                    }).whenComplete(() {
+                                                      print('RoomN add');
+                                                       Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(builder: (context) => CalendarPage()),
+                                                          );
+                                                          });
                                                   },
                                                   style: ElevatedButton
                                                       .styleFrom(),
@@ -220,7 +230,9 @@ class _MainHomePageState extends State<MainHomePage> {
                                     child: Text(
                                       '참여코드 만들기',
                                       style: smallTextStyle(
-                                          color: Color(0xff6D6D6D)),
+
+                                         color: Color(0xff6D6D6D)),
+
                                     ),
                                   ),
                                 )),
