@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import '../style/font.dart';
@@ -14,7 +15,9 @@ class CalendarPage extends StatefulWidget {
 
   @override
   _CalendarPageState createState() => _CalendarPageState();
+  
 }
+
 
 List<bool> press = [
   false,
@@ -203,8 +206,21 @@ class _CalendarPageState extends State<CalendarPage> {
                           return Container(
                             child: GridTile(
                               child: ElevatedButton(
-                                onPressed: () => setState(
-                                    () => press[index] = !press[index]),
+                                onPressed: () async{
+                                  setState(
+                                    () => press[index] = !press[index]);
+                                  await FirebaseFirestore.instance
+                                  .collection('CalendarRoom')
+                                  .doc('${code().codenum}')
+                                  .set({
+                                    'Calendar' : press
+                                  }).
+                                  whenComplete(() {
+                                    print('make Scedule');
+                                    print('${index}');
+                                    print('${press[index]}');
+                                  });
+                                },
                                 child: Align(
                                   alignment: Alignment.topLeft,
                                   child: press[index]
@@ -263,6 +279,18 @@ class icons extends StatelessWidget {
     return Image.asset(
       'assets/icon.png',
       height: 70,
+    );
+  }
+}
+
+class  Calendar{
+  List<bool> press;
+
+  Calendar({required this.press});
+
+  factory Calendar.fromDs(DocumentSnapshot data) {
+    return Calendar(  
+      press: data['Calendar'] ?? '',
     );
   }
 }
