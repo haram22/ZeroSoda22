@@ -185,14 +185,15 @@ class _CalendarPageState extends State<CalendarPage> {
                     width: 359,
                     //height: 100,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 44, top: 28.02),
+                      padding: EdgeInsets.only(left: 51.3, top: 28.02),
                       child: GridView.builder(
                         shrinkWrap: true,
                         itemCount: 60, //item 개수
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 5, //1 개의 행에 보여줄 item 개수
-                          childAspectRatio: 1.3131 / 1, //item 의 가로 1, 세로 2 의 비율
+                          childAspectRatio:
+                              1.4 / 1.096, //item 의 가로 1, 세로 2 의 비율
                           mainAxisSpacing: 0, //수평 Padding
                           crossAxisSpacing: 0, //수직 Padding
                           //mainAxisExtent: 50,

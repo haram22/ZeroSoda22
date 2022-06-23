@@ -1,9 +1,13 @@
+import 'dart:async';
 import 'dart:developer';
 import 'dart:ffi';
 import 'dart:math';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:zerosoda/entrance/profile.dart';
 import '../style/font.dart';
 
 //import 'package:flutter_application_1/style/font.dart';
@@ -250,7 +254,7 @@ Widget HelloText() {
       children: [
         Row(
           children: [
-            Text('', style: titleStyle()),
+            Text(Provider.of<aboutuser>().name, style: titleStyle()),
             Text(
               '님,',
               style: subtitleStyle(),
