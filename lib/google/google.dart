@@ -16,8 +16,8 @@ final TextEditingController idController = TextEditingController();
 final TextEditingController nameController = TextEditingController();
 
 class aboutuser extends ChangeNotifier {
-  final String name = idController.text;
-  final String id = nameController.text;
+  final String name = nameController.text;
+  final String id = idController.text;
 
   notifyListeners();
 }
@@ -120,7 +120,7 @@ class SignInState extends State<SignIn> {
                                     width: 2,
                                   ),
                                   Text(
-                                    'sss$user 학번ㄴㄴㄴㄴㄴㄴㄴ',
+                                    '$user 학번',
                                     style:
                                         buttonStyle(color: Color(0xff6D6D6D)),
                                   ),

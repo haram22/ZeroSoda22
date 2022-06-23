@@ -6,8 +6,27 @@ import 'package:provider/provider.dart';
 import 'package:zerosoda/entrance/profile.dart';
 import 'package:zerosoda/google/google.dart';
 import '../style/font.dart';
-//import 'package:flutter_application_1/style/font.dart';
+import '../calandar/drawer.dart';
 import '../calandar/calanar.dart';
+
+int number = Random().nextInt(8999) + 1000;
+
+//랜덤 한 번 적용
+class code extends ChangeNotifier {
+  final int codenum = number;
+
+  notifyListeners();
+}
+
+// class code extends ChangeNotifier {
+//   int _codenum = 0;
+//   int get codenum => _codenum;
+
+//   void makecode() {
+//     _codenum = Random().nextInt(8999) + 1000;
+//     notifyListeners();
+//   }
+// }
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -16,16 +35,19 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: _title,
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            title: logoImage(),
-          ),
-          body: MainHomePage()),
+    return ChangeNotifierProvider<code>(
+      create: (_) => code(),
+      child: MaterialApp(
+        title: _title,
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              title: logoImage(),
+            ),
+            body: MainHomePage()),
+      ),
     );
   }
 }
@@ -39,9 +61,13 @@ class MainHomePage extends StatefulWidget {
 
 class _MainHomePageState extends State<MainHomePage> {
   FirebaseAuth auth = FirebaseAuth.instance;
-  int _count = Random().nextInt(8999) + 1000;
+  //final randomcode = Provider.of<code>(context);
+  //int _count = Random().nextInt(8999) + 1000;
+  late code _codeProvider;
+
   @override
   Widget build(BuildContext context) {
+    _codeProvider = Provider.of<code>(context, listen: true);
     return Stack(
       children: [
         Align(
@@ -63,6 +89,12 @@ class _MainHomePageState extends State<MainHomePage> {
                         ),
                         ElevatedButton(
                             onPressed: () {
+                              /////////
+                              //_makecode();
+                              setState(() {
+                                number = Random().nextInt(8999) + 1000;
+                              });
+                              //_codeProvider.makecode();
                               showDialog(
                                 context: context,
                                 builder: (BuildContext content) {
@@ -153,7 +185,10 @@ class _MainHomePageState extends State<MainHomePage> {
                                   //side: BorderSide(color: Colors.red)
                                 ))),
                                 onPressed: () {
-                                  randomNumber();
+                                  // _codeProvider.makecode();
+                                  setState(() {
+                                    number = Random().nextInt(8999) + 1000;
+                                  });
                                   showDialog(
                                       context: context,
                                       builder: (BuildContext context) =>
@@ -186,7 +221,7 @@ class _MainHomePageState extends State<MainHomePage> {
                                                           color:
                                                               Colors.yellow)),
                                                   child: Text(
-                                                    '${_count}',
+                                                    '${code().codenum}',
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold),
@@ -195,13 +230,16 @@ class _MainHomePageState extends State<MainHomePage> {
                                                 ),
                                                 TextButton(
                                                   onPressed: () async {
+                                                    // _makecode
                                                     await FirebaseFirestore
                                                         .instance
                                                         .collection('RoomN')
-                                                        .doc('${_count}')
+                                                        .doc(
+                                                            '${code().codenum}')
                                                         .set({
-                                                      'number':
-                                                          _count.toString()
+                                                      'number': code()
+                                                          .codenum
+                                                          .toString()
                                                     }).whenComplete(() {
                                                       print('RoomN add');
                                                       Navigator.push(
