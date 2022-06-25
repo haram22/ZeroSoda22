@@ -4,6 +4,7 @@ import '../style/font.dart';
 import 'calanar.dart';
 import '../screen/home.dart';
 import 'dart:math';
+import '../google/testgoogle.dart';
 
 class DrawerPage extends StatelessWidget {
   const DrawerPage({Key? key}) : super(key: key);
@@ -104,7 +105,7 @@ class DrawerPage extends StatelessWidget {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => MainPage()),
+                                          builder: (context) => SignIn()),
                                     );
                                   }),
                             ),
