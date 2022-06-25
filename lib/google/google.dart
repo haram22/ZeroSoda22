@@ -285,7 +285,7 @@ class SignInState extends State<SignIn> {
         children: <Widget>[
           ElevatedButton(
             onPressed: signInWithGoogle,
-            child: const Text('SIGN IN'),
+            child: const Text('SIGN INㄴㄴㄴㄴㄴ'),
           ),
         ],
       );

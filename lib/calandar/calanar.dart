@@ -15,9 +15,7 @@ class CalendarPage extends StatefulWidget {
 
   @override
   _CalendarPageState createState() => _CalendarPageState();
-  
 }
-
 
 List<bool> press = [
   false,
@@ -130,7 +128,7 @@ class _CalendarPageState extends State<CalendarPage> {
           backgroundColor: Colors.white,
         ),
         resizeToAvoidBottomInset: false,
-        body : ListView(
+        body: ListView(
           children: [
             Container(
               margin: EdgeInsets.fromLTRB(32, 2, 0, 12),
@@ -264,7 +262,8 @@ class _CalendarPageState extends State<CalendarPage> {
               ),
             )
           ],
-        )
+        ));
+
       //   body: StreamBuilder<QuerySnapshot>(
       //   stream: FirebaseFirestore.instance
       //   .collection('CalendarRoom')
@@ -288,7 +287,7 @@ class _CalendarPageState extends State<CalendarPage> {
       //       }
       //     }},
       // )
-      );
+
   }
 
   // Widget _buildCalendar(DocumentSnapshot data){
@@ -449,9 +448,7 @@ class Calendar {
   Calendar({required this.press});
 
   factory Calendar.fromDs(DocumentSnapshot data) {
-
     return Calendar(
-
       press: data['Calendar'] ?? '',
     );
   }
