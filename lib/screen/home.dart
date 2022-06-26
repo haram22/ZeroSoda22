@@ -152,6 +152,7 @@ class _MainHomePageState extends State<MainHomePage> {
                               onPressed: () {
                                 // setState(() {
                                 //   number = Random().nextInt(8999) + 1000;
+                                // 만들기?
                                 // });
                                 showDialog(
                                   context: context,
