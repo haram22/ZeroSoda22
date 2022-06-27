@@ -281,7 +281,7 @@ class _CalendarPageState extends State<CalendarPage> {
                                   );
                                   
                                   await FirebaseFirestore.instance
-                                      .collection('CalendarRoom')
+                                      .collection('${code().codenum}')
                                       .doc('${code().codenum}')
                                       .set({
                                         'Calendar': press,

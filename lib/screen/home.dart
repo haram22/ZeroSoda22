@@ -180,7 +180,7 @@ class _MainHomePageState extends State<MainHomePage> {
                                                 ),
                                                 validator: (value) {
                                                   FirebaseFirestore.instance
-                                                      .collection('RoomN')
+                                                      .collection('${code().inputnum}')
                                                       .doc('${value}')
                                                       .get()
                                                       .then((doc) async {
@@ -197,19 +197,19 @@ class _MainHomePageState extends State<MainHomePage> {
                                           ElevatedButton(
                                             onPressed: () {
                                               FirebaseFirestore.instance
-                                                  .collection('RoomN')
+                                                  .collection('${code().inputnum}')
                                                   .doc('${code().inputnum}')
                                                   .get()
                                                   .then((doc) async {
                                                 print('${code().inputnum}ss');
                                                 if (!doc.exists) {
-                                                  return print("올바른ddd");
+                                                  return print("");
                                                 }
                                                 return Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          CalendarPage()),
+                                                          CalendarRoomPage()),
                                                 );
                                               });
                                             },
@@ -297,7 +297,7 @@ class _MainHomePageState extends State<MainHomePage> {
                                                         fontSize: 20),
                                                   ),
                                                   Text(
-                                                    '팀원들에게 코드를 공유해주세요..',
+                                                    '팀원들에게 코드를 공유해주세요.',
                                                     style:
                                                         TextStyle(fontSize: 14),
                                                   ),
@@ -326,20 +326,21 @@ class _MainHomePageState extends State<MainHomePage> {
                                                       // _makecode
                                                       await FirebaseFirestore
                                                           .instance
-                                                          .collection('RoomN')
+                                                          .collection('${code().codenum}')
                                                           .doc(
                                                               '${code().codenum}')
                                                           .set({
                                                         'number': code()
                                                             .codenum
-                                                            .toString()
+                                                            .toString(),
+                                                            'Calendar': Press
                                                       }).whenComplete(() {
                                                         print('RoomN add');
                                                         Navigator.push(
                                                           context,
                                                           MaterialPageRoute(
                                                               builder: (context) =>
-                                                                  CalendarPage()),
+                                                                  CalendarRoomPage()),
                                                         );
                                                       });
                                                     },
