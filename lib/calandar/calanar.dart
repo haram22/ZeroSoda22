@@ -128,7 +128,7 @@ class _CalendarPageState extends State<CalendarPage> {
           backgroundColor: Colors.white,
         ),
         resizeToAvoidBottomInset: false,
-        body: ListView(
+        body: Column(
           children: [
             Container(
               margin: EdgeInsets.fromLTRB(32, 2, 0, 12),
