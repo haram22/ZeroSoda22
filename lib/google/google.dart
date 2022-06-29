@@ -6,7 +6,8 @@ import '../calandar/drawer.dart';
 import '../screen/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import '../style/font.dart';
+// import '../style/fonts/font.dart';
+import '../style/fonts/font.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 

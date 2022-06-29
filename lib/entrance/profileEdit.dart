@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import '../calandar/calanar.dart';
-import '../style/font.dart';
-
-void main() => runApp(EditProfileForm());
+// import '../style/fonts/font.dart';
+import '../style/fonts/font.dart';
 
 class EditProfileForm extends StatefulWidget {
   @override

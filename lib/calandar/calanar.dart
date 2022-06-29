@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
-import '../style/font.dart';
+// import '../style/fonts/font.dart';
+import '../style/fonts/font.dart';
 //import 'package:flutter_application_1/style/font.dart';
 
 import '../screen/home.dart';
@@ -108,7 +109,7 @@ class _CalendarPageState extends State<CalendarPage> {
           ),
           elevation: 0,
           title: Text(
-            'SODA TIME',
+            'SODA TIME [${code().codenum}]',
             style: titleStyle(color: Color(0xff005A85)),
           ),
           actions: [
@@ -122,6 +123,7 @@ class _CalendarPageState extends State<CalendarPage> {
                 icon: Icon(
                   Icons.account_circle,
                   color: Color(0xff005A85),
+                  //color: Color(0xff005A85),
                   size: 30,
                 ))
           ],
@@ -193,8 +195,7 @@ class _CalendarPageState extends State<CalendarPage> {
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 5, //1 개의 행에 보여줄 item 개수
-                          childAspectRatio:
-                              1.4 / 1.096, //item 의 가로 1, 세로 2 의 비율
+                          childAspectRatio: 1.4 / 1.1, //item 의 가로 1, 세로 2 의 비율
                           mainAxisSpacing: 0, //수평 Padding
                           crossAxisSpacing: 0, //수직 Padding
                           //mainAxisExtent: 50,
