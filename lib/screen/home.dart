@@ -209,7 +209,7 @@ class _MainHomePageState extends State<MainHomePage> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          CalendarRoomPage()),
+                                                          CalendarPage()),
                                                 );
                                               });
                                             },
@@ -330,17 +330,15 @@ class _MainHomePageState extends State<MainHomePage> {
                                                           .doc(
                                                               '${code().codenum}')
                                                           .set({
-                                                        'number': code()
-                                                            .codenum
-                                                            .toString(),
-                                                            'Calendar': Press
+                                                        'number': code().codenum.toString(),
+                                                        'Calendar': Press
                                                       }).whenComplete(() {
                                                         print('RoomN add');
                                                         Navigator.push(
                                                           context,
                                                           MaterialPageRoute(
                                                               builder: (context) =>
-                                                                  CalendarRoomPage()),
+                                                                  CalendarPage()),
                                                         );
                                                       });
                                                     },
