@@ -17,7 +17,7 @@ class CalendarPage extends StatefulWidget {
   _CalendarPageState createState() => _CalendarPageState();
 }
 
-List price = [
+final List price = [
   0,
   0,
   0,
@@ -82,7 +82,7 @@ List price = [
   0,
 ];
 
-List<bool> press = [
+final List<bool> press = [
   false,
   false,
   false,
