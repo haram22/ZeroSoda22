@@ -15,68 +15,68 @@ class CalendarRoomPage extends StatefulWidget {
   _CalendarRoomPageState createState() => _CalendarRoomPageState();
 }
 
-// List<bool> press = [
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false,
-//   false
-// ];
+List<bool> press = [
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false
+];
 
 class _CalendarRoomPageState extends State<CalendarRoomPage> {
   int _count = Random().nextInt(8999) + 1000;
@@ -234,10 +234,10 @@ class _CalendarRoomPageState extends State<CalendarRoomPage> {
                               setState(() => calendar.press[index] =
                                   !calendar.press[index]);
                               await FirebaseFirestore.instance
-                                  .collection('CalendarRoom')
+                                  .collection('${code().inputnum}')
                                   .doc('${code().codenum}')
                                   .set({
-                                'Calendar': Press().press
+                                'Calendar': calendar.press
                               }).whenComplete(() {
                                 print('make Scedule');
                                 print('${index}');
@@ -246,7 +246,7 @@ class _CalendarRoomPageState extends State<CalendarRoomPage> {
                             },
                             child: Align(
                               alignment: Alignment.topLeft,
-                              child: Press().press[index]
+                              child: calendar.press[index]
                                   ? Container(
                                       child: icons(),
                                     )
@@ -307,7 +307,6 @@ class icons extends StatelessWidget {
 
 class Calendar {
   List<bool> press;
-
   Calendar({required this.press});
 
   factory Calendar.fromDs(DocumentSnapshot data) {
