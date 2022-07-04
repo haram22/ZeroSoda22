@@ -18,6 +18,7 @@ class CalendarPage extends StatefulWidget {
   _CalendarPageState createState() => _CalendarPageState();
 }
 
+
 List price = [
   0,
   0,
@@ -202,9 +203,22 @@ class _CalendarPageState extends State<CalendarPage> {
                             child: GridTile(
                               child: ElevatedButton(
                                 onPressed: () async {
+/*
+                                  setState(() => press[index] = !press[index]);
+                                  await FirebaseFirestore.instance
+                                      .collection('CalendarRoom')
+                                      .doc('${code().codenum}')
+                                      .set({'Calendar': press}).whenComplete(
+                                          () {
+                                    print('make Scedule');
+                                    print('${index}');
+                                    print('${press[index]}');
+                                  });
+*/
                                   setState(() => press[index] = !press[index],
                                   );    
                                   print('${index}');                             
+
                                 },
                                 child: Align(
                                   alignment: Alignment.topLeft,
