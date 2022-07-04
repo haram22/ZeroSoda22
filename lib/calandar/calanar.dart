@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
-// import '../style/fonts/font.dart';
 import '../style/fonts/font.dart';
-//import 'package:flutter_application_1/style/font.dart';
 
 import '../screen/home.dart';
 import '../entrance/profileEdit.dart';
@@ -195,7 +193,8 @@ class _CalendarPageState extends State<CalendarPage> {
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 5, //1 개의 행에 보여줄 item 개수
-                          childAspectRatio: 1.4 / 1.1, //item 의 가로 1, 세로 2 의 비율
+                          childAspectRatio:
+                              1.42 / 1.109, //item 의 가로 1, 세로 2 의 비율
                           mainAxisSpacing: 0, //수평 Padding
                           crossAxisSpacing: 0, //수직 Padding
                           //mainAxisExtent: 50,
@@ -218,11 +217,25 @@ class _CalendarPageState extends State<CalendarPage> {
                                   });
                                 },
                                 child: Align(
-                                  alignment: Alignment.topLeft,
+                                  alignment: Alignment.center,
                                   child: press[index]
-                                      ? Container(
-                                          child: icons(),
+                                      ? Icon(
+                                          Icons.check,
+                                          color: Colors.grey,
                                         )
+                                      // Container(
+                                      //     width: 400,
+                                      //     height: 200,
+                                      //     // margin: const EdgeInsets.all(30.0),
+                                      //     // padding: const EdgeInsets.all(10.0),
+                                      //     decoration: BoxDecoration(
+                                      //       border: Border.all(
+                                      //         width: 2,
+                                      //         color: Colors.orange,
+                                      //       ),
+                                      //     ), //  POINT: BoxDecoration
+                                      //     child: Text(''),
+                                      //   )
                                       : Text(''),
                                 ),
                                 //Text('$index, ${press[index]}'),
@@ -246,22 +259,6 @@ class _CalendarPageState extends State<CalendarPage> {
               ],
             ),
             SizedBox(height: 13),
-            Padding(
-              padding: EdgeInsets.only(left: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '✱ 시간표를 탭해서 본인의 일정을 알려주세요.',
-                    style: smallTextStyle(color: Color(0xff6D6D6D)),
-                  ),
-                  Text('✱ 여러명이 탭하면 색이 더 진해집니다.',
-                      style: smallTextStyle(color: Color(0xff6D6D6D))),
-                  Text('✱ 원하는 칸을 길게 누르면 어떤 팀원이 선택했는지 보입니다.',
-                      style: smallTextStyle(color: Color(0xff6D6D6D)))
-                ],
-              ),
-            )
           ],
         ));
   }
