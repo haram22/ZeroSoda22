@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 //import 'package:flutter_screenutil/flutter_screenutil.dart';
+//screenutil 사용해서 화면별 크기 통일
 
 TextStyle titleStyle({bool responsible = false, double? height, Color? color}) {
   return TextStyle(
