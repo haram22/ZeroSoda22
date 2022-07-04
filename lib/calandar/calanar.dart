@@ -15,9 +15,7 @@ class CalendarPage extends StatefulWidget {
 
   @override
   _CalendarPageState createState() => _CalendarPageState();
-  
 }
-
 
 List<bool> press = [
   false,
@@ -130,35 +128,7 @@ class _CalendarPageState extends State<CalendarPage> {
           backgroundColor: Colors.white,
         ),
         resizeToAvoidBottomInset: false,
-        body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance
-        .collection('CalendarRoom')
-        .snapshots(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const CircularProgressIndicator();
-          } else {
-            if (snapshot.data!.size == 0) {
-              return Center(
-                child: Container(
-                    width: 220,
-                    child: const Text('There is no data in Firebase!\n Add data using Floating button')),
-              );
-            } else {
-              return ListView(
-                children: snapshot.data!.docs
-                    .map((DocumentSnapshot data) => _buildCalendar(data))
-                    .toList(),
-              );
-            }
-          }},
-      )
-      );
-  }
-
-  Widget _buildCalendar(DocumentSnapshot data){
-    Calendar calendar = Calendar.fromDs(data);
-    return ListView(
+        body: ListView(
           children: [
             Container(
               margin: EdgeInsets.fromLTRB(32, 2, 0, 12),
@@ -234,16 +204,13 @@ class _CalendarPageState extends State<CalendarPage> {
                           return Container(
                             child: GridTile(
                               child: ElevatedButton(
-                                onPressed: () async{
-                                  setState(
-                                    () => calendar.press[index] = !calendar.press[index]);
+                                onPressed: () async {
+                                  setState(() => press[index] = !press[index]);
                                   await FirebaseFirestore.instance
-                                  .collection('CalendarRoom')
-                                  .doc('${code().codenum}')
-                                  .set({
-                                    'Calendar' : press
-                                  }).
-                                  whenComplete(() {
+                                      .collection('CalendarRoom')
+                                      .doc('${code().codenum}')
+                                      .set({'Calendar': press}).whenComplete(
+                                          () {
                                     print('make Scedule');
                                     print('${index}');
                                     print('${press[index]}');
@@ -295,7 +262,7 @@ class _CalendarPageState extends State<CalendarPage> {
               ),
             )
           ],
-        );
+        ));
   }
 }
 
@@ -311,15 +278,14 @@ class icons extends StatelessWidget {
   }
 }
 
-class  Calendar{
+class Calendar {
   List<bool> press;
 
   Calendar({required this.press});
 
   factory Calendar.fromDs(DocumentSnapshot data) {
-    return Calendar(  
+    return Calendar(
       press: data['Calendar'] ?? '',
     );
   }
 }
-

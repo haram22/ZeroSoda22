@@ -1,23 +1,91 @@
 //real
 import 'dart:async';
-import 'dart:convert' show json;
 import 'package:provider/provider.dart';
-
+import '../calandar/calanar.dart';
+import '../calandar/drawer.dart';
 import '../screen/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-//import 'package:http/http.dart' as http;
 import '../style/font.dart';
-// import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+List<bool> press = [
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false
+];
 final TextEditingController idController = TextEditingController();
 final TextEditingController nameController = TextEditingController();
+final GoogleSignInAccount? user = _currentUser;
+GoogleSignInAccount? _currentUser;
 
 class aboutuser extends ChangeNotifier {
   final String name = nameController.text;
   final String id = idController.text;
+  //Type useruser = ;
+  //String useruser = user.displayName;
+  // GoogleSignInAccount? useruser = user.displayName.toString();
+  String useruser = user!.displayName.toString();
+  //final String? user = _currentUser?.displayName;
+  //String username =
 
   notifyListeners();
 }
@@ -47,7 +115,7 @@ class SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
   bool buttonenabled = false;
   int count = 0;
-  GoogleSignInAccount? _currentUser;
+  // GoogleSignInAccount? _currentUser;
   String _contactText = '';
 
   @override
@@ -91,169 +159,124 @@ class SignInState extends State<SignIn> {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-  Future<void> _handleSignOut() => _googleSignIn.disconnect();
+  Future<void> _handleSignOut() => _googleSignIn.disconnect(); ////
 
   Widget _buildBody() {
     final GoogleSignInAccount? user = _currentUser;
     if (user != null) {
-      return Provider(
-        create: (context) => MainPage(),
-        child: Center(
-          child: Stack(
-            children: [
-              Stack(
-                children: [
+      return ChangeNotifierProvider<code>(
+        create: (_) => code(),
+        child: MaterialApp(
+          title: "Home",
+          debugShowCheckedModeBanner: false,
+          home: Scaffold(
+              appBar: AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                title: logoImage(),
+                actions: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 24, right: 24),
-                    child: Form(
-                      key: _formKey,
-                      child: Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 63,
-                              ),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: 2,
-                                  ),
-                                  Text(
-                                    '$user 학번',
-                                    style:
-                                        buttonStyle(color: Color(0xff6D6D6D)),
-                                  ),
-                                  Spacer()
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              idTextFormField('id', idController),
-                              SizedBox(
-                                height: 34,
-                              ),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: 2,
-                                  ),
-                                  Text(
-                                    '이름',
-                                    style:
-                                        buttonStyle(color: Color(0xff6D6D6D)),
-                                  ),
-                                  Spacer()
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              nameTextFormField('Name', nameController),
-                              SizedBox(
-                                height: 34,
-                              ),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: 2,
-                                  ),
-                                  Text(
-                                    '역할',
-                                    style:
-                                        buttonStyle(color: Color(0xff6D6D6D)),
-                                  ),
-                                  Spacer()
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              myRole(),
-                            ],
-                          ),
+                      padding: const EdgeInsets.only(right: 12.0),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.logout_rounded,
+                          color: Color(0xff005A85),
                         ),
-                      ),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext content) {
+                              return AlertDialog(
+                                alignment: Alignment.center,
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text('로그아웃 하시겠습니까?',
+                                        style: smallTextStyle()),
+                                    Row(
+                                      children: [
+                                        ElevatedButton(
+                                          onPressed: Navigator.of(context).pop,
+                                          style: ButtonStyle(
+                                              backgroundColor:
+                                                  MaterialStateProperty.all<
+                                                      Color>(Color(0xff007AB5)),
+                                              shape: MaterialStateProperty.all<
+                                                      RoundedRectangleBorder>(
+                                                  RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                                //side: BorderSide(color: Colors.red)
+                                              ))),
+                                          child: Container(
+                                              height: 30,
+                                              width: 99,
+                                              child: Center(
+                                                  child: Text(
+                                                '아니요',
+                                                style: smallTextStyle(),
+                                              ))),
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: _handleSignOut,
+                                          style: ButtonStyle(
+                                              backgroundColor:
+                                                  MaterialStateProperty.all<
+                                                      Color>(Color(0xff007AB5)),
+                                              shape: MaterialStateProperty.all<
+                                                      RoundedRectangleBorder>(
+                                                  RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                                //side: BorderSide(color: Colors.red)
+                                              ))),
+                                          child: Container(
+                                              height: 30,
+                                              width: 99,
+                                              child: Center(
+                                                  child: Text(
+                                                '네',
+                                                style: smallTextStyle(),
+                                              ))),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      )),
+                ],
+              ),
+              body: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.fromLTRB(34, 32, 34, 32),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text('${user.displayName}', style: titleStyle()),
+                            Text(
+                              ' 님,',
+                              style: subtitleStyle(),
+                            )
+                          ],
+                        ),
+                        Text(
+                          'ZERO SODA와 함께 즐거운 팀플 시간 되세요!',
+                          style: smallTextStyle(),
+                        )
+                      ],
                     ),
                   ),
+                  Provider(
+                      create: (context) => aboutuser(), child: MainHomePage()),
                 ],
-              ),
-              Stack(
-                children: [
-                  Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                          child: Image.asset('assets/backgroundfinal.png'))),
-                ],
-              ),
-              Stack(
-                children: [
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        top: 513,
-                      ),
-                      child: Container(
-                        width: 259,
-                        height: 60,
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            // if (_formKey.currentState!.validate()) {
-                            //   await FirebaseFirestore.instance
-                            //       .collection('User')
-                            //       .doc('${user}')
-                            //       .set({
-                            //     'user Email': user.email,
-                            //     'user name': nameController.text,
-                            //     '학번': idController.text,
-                            //     'user': user
-                            //   }).whenComplete(() {
-                            //     print('user add');
-                            //     Navigator.push(
-                            //         context,
-                            //         MaterialPageRoute(
-                            //             builder: (context) => MainPage()));
-                            //   });
-                            // }
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MainPage()));
-                          },
-                          style: ButtonStyle(
-                              shadowColor: MaterialStateProperty.all<Color>(
-                                  Colors.transparent),
-                              backgroundColor:
-                                  MaterialStateProperty.resolveWith((states) {
-                                if (states.contains(MaterialState.disabled)) {
-                                  return Colors.yellow;
-                                }
-                                return Color(0xff007AB5);
-                              }),
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30),
-                                      side: BorderSide(
-                                          color: Color(0xff007AB5))))),
-                          child: Text(
-                            '시작하기',
-                            style: buttonStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              ElevatedButton(
-                onPressed: _handleSignOut,
-                child: const Text('SIGN OUT'),
-              ),
-            ],
-          ),
+              )),
         ),
       );
     } else {
@@ -262,7 +285,7 @@ class SignInState extends State<SignIn> {
         children: <Widget>[
           ElevatedButton(
             onPressed: signInWithGoogle,
-            child: const Text('SIGN IN'),
+            child: const Text('SIGN INㄴㄴㄴㄴㄴ'),
           ),
         ],
       );
@@ -271,14 +294,12 @@ class SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Google Sign In'),
-        ),
-        body: ConstrainedBox(
-          constraints: const BoxConstraints.expand(),
-          child: _buildBody(),
-        ));
+    return Scaffold(body: _buildBody()
+        // ConstrainedBox(
+        //   constraints: const BoxConstraints.expand(),
+        //   child: _buildBody(),
+        // )
+        );
   }
 
   Widget nameTextFormField(String name, TextEditingController controller) {

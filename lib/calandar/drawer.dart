@@ -4,6 +4,7 @@ import '../style/font.dart';
 import 'calanar.dart';
 import '../screen/home.dart';
 import 'dart:math';
+import '../google/testgoogle.dart';
 
 class DrawerPage extends StatelessWidget {
   const DrawerPage({Key? key}) : super(key: key);
@@ -34,7 +35,12 @@ class DrawerPage extends StatelessWidget {
                       border: Border.all(color: Color(0xffFFC700))),
                   child: Center(
                     child: Text(
-                      '${code().codenum}sss',
+                      // if ( code().inputnum!= null)
+                      // {code().inputnum;};
+                      // else {
+                      //   '${code().codenum}';
+                      // }
+                      '${code().codenum}',
                       style: titleStyle(),
                       textAlign: TextAlign.center,
                     ),
@@ -104,7 +110,7 @@ class DrawerPage extends StatelessWidget {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => MainPage()),
+                                          builder: (context) => SignIn()),
                                     );
                                   }),
                             ),
