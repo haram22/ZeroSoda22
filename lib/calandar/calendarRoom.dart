@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import '../style/font.dart';
-//import 'package:flutter_application_1/style/font.dart';
-
 import '../screen/home.dart';
 import '../entrance/profileEdit.dart';
 import 'drawer.dart';
