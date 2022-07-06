@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:zerosoda/main.dart';
 import 'dart:math';
-import '../style/font.dart';
+
 //import 'package:flutter_application_1/style/font.dart';
 
 import '../screen/home.dart';
@@ -81,6 +81,7 @@ List price = [
   0,
   0,
 ];
+
 
 List<bool> press = [
   false,
@@ -321,8 +322,78 @@ class _CalendardPageState extends State<CalendarStartPage> {
               )
             ],
           ),
-        )
+        ),
+        Stack(
+          children: [
+            Center(
+              child: Image.asset('assets/timeTable.png', width: 343),
+            ),
+            Container(
+                width: 359,
+                //height: 100,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 51.3, top: 28.02),
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    itemCount: 60, //item 개수
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 5, //1 개의 행에 보여줄 item 개수
+                      childAspectRatio: 1.4 / 1.096, //item 의 가로 1, 세로 2 의 비율
+                      mainAxisSpacing: 0, //수평 Padding
+                      crossAxisSpacing: 0, //수직 Padding
+                      //mainAxisExtent: 50,
+                    ),
+                    itemBuilder: (BuildContext context, int index) {
+                      //item 의 반목문 항목 형성
+                      return Container(
+                        child: GridTile(
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              setState(() => calendar.press[index] =
+                                  !calendar.press[index]);
+                              await FirebaseFirestore.instance
 
+                                  .collection('${code().inputnum}')
+                                  .doc('${code().codenum}')
+                                  .set({
+                                'Calendar': calendar.press
+
+                              }).whenComplete(() {
+                                print('make Scedule');
+                                print('${index}');
+                                print('${Press().press[index]}');
+                              });
+                            },
+                            child: Align(
+                              alignment: Alignment.topLeft,
+
+                              //     child: Press().press[index]
+
+                              child: calendar.press[index]
+
+                                  ? Container(
+                                      child: icons(),
+                                    )
+                                  : Text(''),
+                            ),
+                            //Text('$index, ${press[index]}'),
+                            style: ElevatedButton.styleFrom(
+                              elevation: 0.0,
+                              primary: Press().press[index]
+                                  ? Color(0xffE6EFF3)
+                                  : Colors.white,
+                              splashFactory: NoSplash.splashFactory,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(0.0),
+                                  side: BorderSide(color: Color(0xffE5E5E5))),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                )),
           ],
           
         )

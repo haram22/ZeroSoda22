@@ -2,8 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:zerosoda/main.dart';
 import 'dart:math';
-import '../style/font.dart';
-//import 'package:flutter_application_1/style/font.dart';
+import '../style/fonts/font.dart';
 
 import '../screen/home.dart';
 import '../entrance/profileEdit.dart';
@@ -17,6 +16,8 @@ class CalendarPage extends StatefulWidget {
   @override
   _CalendarPageState createState() => _CalendarPageState();
 }
+
+
 
 List price = [
   0,
@@ -83,7 +84,7 @@ List price = [
   0,
 ];
 
-List<bool> press = [
+final List<bool> press = [
   false,
   false,
   false,
@@ -168,11 +169,29 @@ class _CalendarPageState extends State<CalendarPage> {
             icon : Icon(Icons.cancel_outlined),
           ),
           elevation: 0,
-          title: logoImage(),
+          title: Text(
+            'SODA TIME [${code().codenum}]',
+            style: titleStyle(color: Color(0xff005A85)),
+          ),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => EditProfileForm()),
+                  );
+                },
+                icon: Icon(
+                  Icons.account_circle,
+                  color: Color(0xff005A85),
+                  //color: Color(0xff005A85),
+                  size: 30,
+                ))
+          ],
           backgroundColor: Colors.white,
         ),
         resizeToAvoidBottomInset: false,
-        body: ListView(
+        body: Column(
           children: [
             Stack(
               children: [
@@ -191,7 +210,7 @@ class _CalendarPageState extends State<CalendarPage> {
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 5, //1 개의 행에 보여줄 item 개수
                           childAspectRatio:
-                              1.4 / 1.096, //item 의 가로 1, 세로 2 의 비율
+                              1.42 / 1.109, //item 의 가로 1, 세로 2 의 비율
                           mainAxisSpacing: 0, //수평 Padding
                           crossAxisSpacing: 0, //수직 Padding
                           //mainAxisExtent: 50,
@@ -202,16 +221,51 @@ class _CalendarPageState extends State<CalendarPage> {
                             child: GridTile(
                               child: ElevatedButton(
                                 onPressed: () async {
+
+                                  setState(() {
+                                    press[index] = !press[index];
+                                    if (press[index] = true) {
+                                    } else if (price[index] = false) {
+                                      price[index]--;
+                                    }
+                                  });
+
+/*
+                                  setState(() => press[index] = !press[index]);
+
+                                    'Calendar': press,
+                                    'Calendar price': price
+                                  }).whenComplete(() {
+                                    print('make Scedule');
+                                    print('${index}');
+                                    print('${press[index]}');
+                                  });
+*/
                                   setState(() => press[index] = !press[index],
                                   );    
                                   print('${index}');                             
+
                                 },
                                 child: Align(
-                                  alignment: Alignment.topLeft,
+                                  alignment: Alignment.center,
                                   child: press[index]
-                                      ? Container(
-                                          child: icons(),
+                                      ? Icon(
+                                          Icons.check,
+                                          color: Colors.grey,
                                         )
+                                      // Container(
+                                      //     width: 400,
+                                      //     height: 200,
+                                      //     // margin: const EdgeInsets.all(30.0),
+                                      //     // padding: const EdgeInsets.all(10.0),
+                                      //     decoration: BoxDecoration(
+                                      //       border: Border.all(
+                                      //         width: 2,
+                                      //         color: Colors.orange,
+                                      //       ),
+                                      //     ), //  POINT: BoxDecoration
+                                      //     child: Text(''),
+                                      //   )
                                       : Text(''),
                                 ),
                                 //Text('$index, ${press[index]}'),
@@ -272,8 +326,170 @@ class _CalendarPageState extends State<CalendarPage> {
             )
           ],
         ));
+
+    //   body: StreamBuilder<QuerySnapshot>(
+    //   stream: FirebaseFirestore.instance
+    //   .collection('CalendarRoom')
+    //   .snapshots(),
+    //   builder: (context, snapshot) {
+    //     if (!snapshot.hasData) {
+    //       return const CircularProgressIndicator();
+    //     } else {
+    //       if (snapshot.data!.size == 0) {
+    //         return Center(
+    //           child: Container(
+    //               width: 220,
+    //               child: const Text('There is no data in Firebase!\n Add data using Floating button')),
+    //         );
+    //       } else {
+    //         return ListView(
+    //           children: snapshot.data!.docs
+    //               .map((DocumentSnapshot data) => _buildCalendar(data))
+    //               .toList(),
+    //         );
+    //       }
+    //     }},
+    // )
   }
 
+  // Widget _buildCalendar(DocumentSnapshot data){
+  //   Calendar calendar = Calendar.fromDs(data);
+  //   return ListView(
+  //         children: [
+  //           Container(
+  //             margin: EdgeInsets.fromLTRB(32, 2, 0, 12),
+  //             child: Row(
+  //               children: [
+  //                 Container(
+  //                   height: 16,
+  //                   width: 16,
+  //                   color: Color(0xffE6EFF3),
+  //                   margin: EdgeInsets.only(right: 4),
+  //                 ),
+  //                 Text(
+  //                   '1명',
+  //                   style: smallTextStyle(),
+  //                 ),
+  //                 Container(
+  //                   height: 16,
+  //                   width: 16,
+  //                   color: Color(0xff99BDCE),
+  //                   margin: EdgeInsets.only(right: 4, left: 8),
+  //                 ),
+  //                 Text(
+  //                   '2명',
+  //                   style: smallTextStyle(),
+  //                 ),
+  //                 Container(
+  //                   height: 16,
+  //                   width: 16,
+  //                   color: Color(0xff4D8CAA),
+  //                   margin: EdgeInsets.only(right: 4, left: 8),
+  //                 ),
+  //                 Text(
+  //                   '3명',
+  //                   style: smallTextStyle(),
+  //                 ),
+  //                 Container(
+  //                   height: 16,
+  //                   width: 16,
+  //                   color: Color(0xff005A85),
+  //                   margin: EdgeInsets.only(right: 4, left: 8),
+  //                 ),
+  //                 Text(
+  //                   '4명+',
+  //                   style: smallTextStyle(),
+  //                 )
+  //               ],
+  //             ),
+  //           ),
+  //           Stack(
+  //             children: [
+  //               Center(
+  //                 child: Image.asset('assets/timeTable.png', width: 343),
+  //               ),
+  //               Container(
+  //                   width: 359,
+  //                   //height: 100,
+  //                   child: Padding(
+  //                     padding: EdgeInsets.only(left: 51.3, top: 28.02),
+  //                     child: GridView.builder(
+  //                       shrinkWrap: true,
+  //                       itemCount: 60, //item 개수
+  //                       gridDelegate:
+  //                           const SliverGridDelegateWithFixedCrossAxisCount(
+  //                         crossAxisCount: 5, //1 개의 행에 보여줄 item 개수
+  //                         childAspectRatio:
+  //                             1.4 / 1.096, //item 의 가로 1, 세로 2 의 비율
+  //                         mainAxisSpacing: 0, //수평 Padding
+  //                         crossAxisSpacing: 0, //수직 Padding
+  //                         //mainAxisExtent: 50,
+  //                       ),
+  //                       itemBuilder: (BuildContext context, int index) {
+  //                         //item 의 반목문 항목 형성
+  //                         return Container(
+  //                           child: GridTile(
+  //                             child: ElevatedButton(
+  //                               onPressed: () async {
+  //                                 setState(() => press[index] = !press[index]);
+  //                                 await FirebaseFirestore.instance
+  //                                     .collection('CalendarRoom')
+  //                                     .doc('${code().codenum}')
+  //                                     .set({'Calendar': press}).whenComplete(
+  //                                         () {
+  //                                   print('make Scedule');
+  //                                   print('${index}');
+  //                                   print('${press[index]}');
+  //                                 });
+  //                               },
+  //                               child: Align(
+  //                                 alignment: Alignment.topLeft,
+  //                                 child: press[index]
+  //                                     ? Container(
+  //                                         child: icons(),
+  //                                       )
+  //                                     : Text(''),
+  //                               ),
+  //                               //Text('$index, ${press[index]}'),
+  //                               style: ElevatedButton.styleFrom(
+  //                                 elevation: 0.0,
+  //                                 primary: press[index]
+  //                                     ? Color(0xffE6EFF3)
+  //                                     : Colors.white,
+  //                                 splashFactory: NoSplash.splashFactory,
+  //                                 shape: RoundedRectangleBorder(
+  //                                     borderRadius: BorderRadius.circular(0.0),
+  //                                     side:
+  //                                         BorderSide(color: Color(0xffE5E5E5))),
+  //                               ),
+  //                             ),
+  //                           ),
+  //                         );
+  //                       },
+  //                     ),
+  //                   )),
+  //             ],
+  //           ),
+  //           SizedBox(height: 13),
+  //           Padding(
+  //             padding: EdgeInsets.only(left: 16),
+  //             child: Column(
+  //               crossAxisAlignment: CrossAxisAlignment.start,
+  //               children: [
+  //                 Text(
+  //                   '✱ 시간표를 탭해서 본인의 일정을 알려주세요.',
+  //                   style: smallTextStyle(color: Color(0xff6D6D6D)),
+  //                 ),
+  //                 Text('✱ 여러명이 탭하면 색이 더 진해집니다.',
+  //                     style: smallTextStyle(color: Color(0xff6D6D6D))),
+  //                 Text('✱ 원하는 칸을 길게 누르면 어떤 팀원이 선택했는지 보입니다.',
+  //                     style: smallTextStyle(color: Color(0xff6D6D6D)))
+  //               ],
+  //             ),
+  //           )
+  //         ],
+  //       );
+  // }
 }
 
 class icons extends StatelessWidget {

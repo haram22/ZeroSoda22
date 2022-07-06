@@ -6,11 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zerosoda/entrance/profile.dart';
 import 'package:zerosoda/google/google.dart';
-// import '../style/fonts/font.dart';
-import '../style/fonts/font.dart';
-import '../calandar/drawer.dart';
-import '../calandar/calanar.dart';
-import '../calandar/calendarRoom.dart';
+import 'package:zerosoda/style/fonts/font.dart';
+import 'package:zerosoda/calandar/calendarRoom.dart';
+import 'package:zerosoda/calandar/calanar.dart';
 
 int number = Random().nextInt(8999) + 1000;
 final TextEditingController inputController = TextEditingController();
@@ -149,7 +147,7 @@ class _MainHomePageState extends State<MainHomePage> {
                               onPressed: () {
                                 // setState(() {
                                 //   number = Random().nextInt(8999) + 1000;
-
+                                // 만들기?
                                 // });
                                 showDialog(
                                   context: context,
@@ -161,10 +159,12 @@ class _MainHomePageState extends State<MainHomePage> {
                                         children: [
                                           Text(
                                             '참여하기',
-                                            style: titleStyle(),
+                                            // style: titleStyle(),
                                           ),
-                                          Text('팀장에게 공유받은 참여코드를 입력해주세요.',
-                                              style: smallTextStyle()),
+                                          Text(
+                                            '팀장에게 공유받은 참여코드를 입력해주세요.',
+                                            //  style: smallTextStyle()
+                                          ),
                                           Container(
                                               margin: EdgeInsets.only(
                                                   top: 20, bottom: 20),
@@ -178,16 +178,7 @@ class _MainHomePageState extends State<MainHomePage> {
                                                 ),
                                                 validator: (value) {
                                                   FirebaseFirestore.instance
-<<<<<<< HEAD
-                                                      .collection(
-                                                          '${code().inputnum}')
-=======
-
-                                                   //   .collection('RoomN')
-
-                                                      .collection('${code().inputnum}')
-
->>>>>>> 76783e7b5d4d87575e5f83797128a2eac5561706
+                                                      .collection('RoomN')
                                                       .doc('${value}')
                                                       .get()
                                                       .then((doc) async {
@@ -204,30 +195,13 @@ class _MainHomePageState extends State<MainHomePage> {
                                           ElevatedButton(
                                             onPressed: () {
                                               FirebaseFirestore.instance
-<<<<<<< HEAD
-                                                  .collection(
-                                                      '${code().inputnum}')
-=======
-
-                                             //     .collection('RoomN')
-
-                                                  .collection('${code().inputnum}')
-
->>>>>>> 76783e7b5d4d87575e5f83797128a2eac5561706
+                                                  .collection('RoomN')
                                                   .doc('${code().inputnum}')
                                                   .get()
                                                   .then((doc) async {
                                                 print('${code().inputnum}ss');
                                                 if (!doc.exists) {
-<<<<<<< HEAD
-                                                  return print("");
-=======
-
-                       //                           return print("올바른ddd");
-
-                                                  return print("");
-
->>>>>>> 76783e7b5d4d87575e5f83797128a2eac5561706
+                                                  return print("올바른ddd");
                                                 }
                                                 return Navigator.push(
                                                   context,
@@ -255,7 +229,7 @@ class _MainHomePageState extends State<MainHomePage> {
                                                 child: Center(
                                                     child: Text(
                                                   '확인',
-                                                  style: smallTextStyle(),
+                                                  // style: smallTextStyle(),
                                                 ))),
                                           )
                                         ],
@@ -286,101 +260,12 @@ class _MainHomePageState extends State<MainHomePage> {
                               )),
                           Center(
                             child: Container(
-                              // child: TextButton(
-                              //     style: ButtonStyle(
-                              //         shape: MaterialStateProperty.all<
-                              //                 RoundedRectangleBorder>(
-                              //             RoundedRectangleBorder(
-                              //       borderRadius: BorderRadius.circular(30),
-                              //       //side: BorderSide(color: Colors.red)
-                              //     ))),
-                              //     onPressed: () {
-                              //       // _codeProvider.makecode();
-                              //       setState(() {
-                              //         number = Random().nextInt(8999) + 1000;
-                              //       });
-                              //       showDialog(
-                              //           context: context,
-                              //           builder: (BuildContext context) =>
-                              //               AlertDialog(
-                              //                 alignment: Alignment.center,
-                              //                 content: Column(
-                              //                   mainAxisSize: MainAxisSize.min,
-                              //                   children: [
-                              //                     Text(
-                              //                       '참여코드',
-                              //                       style: TextStyle(
-                              //                           fontWeight:
-                              //                               FontWeight.bold,
-                              //                           fontSize: 20),
-                              //                     ),
-                              //                     Text(
-                              //                       '팀원들에게 코드를 공유해주세요..',
-                              //                       style:
-                              //                           TextStyle(fontSize: 14),
-                              //                     ),
-                              //                     Container(
-                              //                       padding: EdgeInsets.only(
-                              //                           top: 21, bottom: 21),
-                              //                       height: 60,
-                              //                       width: 248,
-                              //                       margin: EdgeInsets.only(
-                              //                           top: 20, bottom: 20),
-                              //                       decoration: BoxDecoration(
-                              //                           border: Border.all(
-                              //                               color:
-                              //                                   Colors.yellow)),
-                              //                       child: Text(
-                              //                         '${code().codenum}',
-                              //                         style: TextStyle(
-                              //                             fontWeight:
-                              //                                 FontWeight.bold),
-                              //                         textAlign:
-                              //                             TextAlign.center,
-                              //                       ),
-                              //                     ),
-                              //                     TextButton(
-                              //                       onPressed: () async {
-                              //                         // _makecode
-                              //                         await FirebaseFirestore
-                              //                             .instance
-                              //                             .collection('RoomN')
-                              //                             .doc(
-                              //                                 '${code().codenum}')
-                              //                             .set({
-                              //                           'number': code()
-                              //                               .codenum
-                              //                               .toString()
-                              //                         }).whenComplete(() {
-                              //                           print('RoomN add');
-                              //                           Navigator.push(
-                              //                             context,
-                              //                             MaterialPageRoute(
-                              //                                 builder: (context) =>
-                              //                                     CalendarPage()),
-                              //                           );
-                              //                         });
-                              //                       },
-                              //                       style: ElevatedButton
-                              //                           .styleFrom(),
-                              //                       child: Text('확인'),
-                              //                     )
-                              //                   ],
-                              //                 ),
-                              //               ));
-                              //     },
-                              //     child: Container(
-                              //       width: 68,
-                              //       height: 18,
-                              //       child: Center(
-                              //         child: Text(
-                              //           '',
-                              //           style: smallTextStyle(
-                              //               color: Color(0xff6D6D6D)),
-                              //         ),
-                              //       ),
-                              //     )),
-
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                      width: 0.5, color: Colors.black),
+                                ),
+                              ),
                               child: TextButton(
                                   style: ButtonStyle(
                                       shape: MaterialStateProperty.all<
@@ -410,13 +295,7 @@ class _MainHomePageState extends State<MainHomePage> {
                                                         fontSize: 20),
                                                   ),
                                                   Text(
-<<<<<<< HEAD
-                                                    '팀원들에게 코드를 공유해주세요.',
-=======
-
                                                     '팀원들에게 코드를 공유해주세요..',
-
->>>>>>> 76783e7b5d4d87575e5f83797128a2eac5561706
                                                     style:
                                                         TextStyle(fontSize: 14),
                                                   ),
@@ -445,32 +324,13 @@ class _MainHomePageState extends State<MainHomePage> {
                                                       // _makecode
                                                       await FirebaseFirestore
                                                           .instance
-<<<<<<< HEAD
-                                                          .collection(
-                                                              '${code().codenum}')
-=======
-
-                                                        /*  .collection('RoomN')
->>>>>>> 76783e7b5d4d87575e5f83797128a2eac5561706
+                                                          .collection('RoomN')
                                                           .doc(
                                                               '${code().codenum}')
                                                           .set({
                                                         'number': code()
                                                             .codenum
-<<<<<<< HEAD
-                                                            .toString(),
-                                                        'Calendar': Press
-=======
-                                                            .toString()*/
-
-                                                          .collection('${code().codenum}')
-                                                          .doc(
-                                                              '${code().codenum}')
-                                                          .set({
-                                                        'number': code().codenum.toString(),
-                                                        'Calendar': Press
-
->>>>>>> 76783e7b5d4d87575e5f83797128a2eac5561706
+                                                            .toString()
                                                       }).whenComplete(() {
                                                         print('RoomN add');
                                                         Navigator.push(

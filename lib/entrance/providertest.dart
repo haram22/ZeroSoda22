@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zerosoda/main.dart';
 //import 'package:flutter_application_1/screen/home.dart';
 import '../calandar/calanar.dart';
-import '../style/font.dart';
+import 'package:zerosoda/style/fonts/font.dart';
 import 'package:zerosoda/entrance/profileEdit.dart';
 import '../screen/home.dart';
 
