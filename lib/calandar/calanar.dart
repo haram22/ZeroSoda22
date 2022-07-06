@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:zerosoda/main.dart';
 import 'dart:math';
 import '../style/fonts/font.dart';
 
@@ -17,9 +16,7 @@ class CalendarPage extends StatefulWidget {
   _CalendarPageState createState() => _CalendarPageState();
 }
 
-
-
-List price = [
+final List price = [
   0,
   0,
   0,
@@ -161,12 +158,17 @@ class _CalendarPageState extends State<CalendarPage> {
           ),
         ),
         appBar: AppBar(
-          leading: IconButton(
-            onPressed: (){
-              Navigator.pop(context);
-            },
-            color: Color(0xff007AB5),
-            icon : Icon(Icons.cancel_outlined),
+          leading: Builder(
+            builder: (context) => IconButton(
+              icon: Icon(
+                Icons.menu,
+                color: Color(0xff005A85),
+                size: 30,
+              ),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            ),
           ),
           elevation: 0,
           title: Text(
@@ -193,6 +195,53 @@ class _CalendarPageState extends State<CalendarPage> {
         resizeToAvoidBottomInset: false,
         body: Column(
           children: [
+            Container(
+              margin: EdgeInsets.fromLTRB(32, 2, 0, 12),
+              child: Row(
+                children: [
+                  Container(
+                    height: 16,
+                    width: 16,
+                    color: Color(0xffE6EFF3),
+                    margin: EdgeInsets.only(right: 4),
+                  ),
+                  Text(
+                    '1명',
+                    style: smallTextStyle(),
+                  ),
+                  Container(
+                    height: 16,
+                    width: 16,
+                    color: Color(0xff99BDCE),
+                    margin: EdgeInsets.only(right: 4, left: 8),
+                  ),
+                  Text(
+                    '2명',
+                    style: smallTextStyle(),
+                  ),
+                  Container(
+                    height: 16,
+                    width: 16,
+                    color: Color(0xff4D8CAA),
+                    margin: EdgeInsets.only(right: 4, left: 8),
+                  ),
+                  Text(
+                    '3명',
+                    style: smallTextStyle(),
+                  ),
+                  Container(
+                    height: 16,
+                    width: 16,
+                    color: Color(0xff005A85),
+                    margin: EdgeInsets.only(right: 4, left: 8),
+                  ),
+                  Text(
+                    '4명+',
+                    style: smallTextStyle(),
+                  )
+                ],
+              ),
+            ),
             Stack(
               children: [
                 Center(
@@ -221,18 +270,19 @@ class _CalendarPageState extends State<CalendarPage> {
                             child: GridTile(
                               child: ElevatedButton(
                                 onPressed: () async {
-
                                   setState(() {
                                     press[index] = !press[index];
                                     if (press[index] = true) {
+                                      price[index]++;
                                     } else if (price[index] = false) {
                                       price[index]--;
                                     }
                                   });
 
-/*
-                                  setState(() => press[index] = !press[index]);
-
+                                  await FirebaseFirestore.instance
+                                      .collection('${code().codenum}')
+                                      .doc('${code().codenum}')
+                                      .set({
                                     'Calendar': press,
                                     'Calendar price': price
                                   }).whenComplete(() {
@@ -240,11 +290,6 @@ class _CalendarPageState extends State<CalendarPage> {
                                     print('${index}');
                                     print('${press[index]}');
                                   });
-*/
-                                  setState(() => press[index] = !press[index],
-                                  );    
-                                  print('${index}');                             
-
                                 },
                                 child: Align(
                                   alignment: Alignment.center,
@@ -286,44 +331,9 @@ class _CalendarPageState extends State<CalendarPage> {
                         },
                       ),
                     )),
-              ], 
-              
+              ],
             ),
             SizedBox(height: 13),
-            Padding(
-              padding: EdgeInsets.only(right: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                 TextButton(
-                    style: ButtonStyle(
-                              shadowColor: MaterialStateProperty.all<Color>(
-                                  Colors.transparent),   
-                                  backgroundColor: MaterialStateProperty.all(Color(0xff007AB5)),
-                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-    RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(18.0))),
-                                  ),
-
-                   onPressed: () async{
-                     await FirebaseFirestore.instance
-                                      .collection('CalendarRoom')
-                                    .doc('${code().codenum}')
-                                      .set({
-                                        'Calendar': press                                       
-                                      } 
-                                      ).whenComplete(
-                                          () {
-                                    print('make Scedule');
-                                     Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MainPage()));
-                                  });
-                   }, 
-                   child: Text('저장',style: TextStyle(color: Colors.white)))
-                ],
-              ),
-            )
           ],
         ));
 
