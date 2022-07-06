@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 //real //test에 있는 부분 
+=======
+
+>>>>>>> 76783e7b5d4d87575e5f83797128a2eac5561706
 import 'dart:async';
 import 'package:provider/provider.dart';
 import 'package:zerosoda/main.dart';

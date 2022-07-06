@@ -149,6 +149,7 @@ class _MainHomePageState extends State<MainHomePage> {
                               onPressed: () {
                                 // setState(() {
                                 //   number = Random().nextInt(8999) + 1000;
+
                                 // });
                                 showDialog(
                                   context: context,
@@ -177,8 +178,16 @@ class _MainHomePageState extends State<MainHomePage> {
                                                 ),
                                                 validator: (value) {
                                                   FirebaseFirestore.instance
+<<<<<<< HEAD
                                                       .collection(
                                                           '${code().inputnum}')
+=======
+
+                                                   //   .collection('RoomN')
+
+                                                      .collection('${code().inputnum}')
+
+>>>>>>> 76783e7b5d4d87575e5f83797128a2eac5561706
                                                       .doc('${value}')
                                                       .get()
                                                       .then((doc) async {
@@ -195,14 +204,30 @@ class _MainHomePageState extends State<MainHomePage> {
                                           ElevatedButton(
                                             onPressed: () {
                                               FirebaseFirestore.instance
+<<<<<<< HEAD
                                                   .collection(
                                                       '${code().inputnum}')
+=======
+
+                                             //     .collection('RoomN')
+
+                                                  .collection('${code().inputnum}')
+
+>>>>>>> 76783e7b5d4d87575e5f83797128a2eac5561706
                                                   .doc('${code().inputnum}')
                                                   .get()
                                                   .then((doc) async {
                                                 print('${code().inputnum}ss');
                                                 if (!doc.exists) {
+<<<<<<< HEAD
                                                   return print("");
+=======
+
+                       //                           return print("올바른ddd");
+
+                                                  return print("");
+
+>>>>>>> 76783e7b5d4d87575e5f83797128a2eac5561706
                                                 }
                                                 return Navigator.push(
                                                   context,
@@ -385,7 +410,13 @@ class _MainHomePageState extends State<MainHomePage> {
                                                         fontSize: 20),
                                                   ),
                                                   Text(
+<<<<<<< HEAD
                                                     '팀원들에게 코드를 공유해주세요.',
+=======
+
+                                                    '팀원들에게 코드를 공유해주세요..',
+
+>>>>>>> 76783e7b5d4d87575e5f83797128a2eac5561706
                                                     style:
                                                         TextStyle(fontSize: 14),
                                                   ),
@@ -414,15 +445,32 @@ class _MainHomePageState extends State<MainHomePage> {
                                                       // _makecode
                                                       await FirebaseFirestore
                                                           .instance
+<<<<<<< HEAD
                                                           .collection(
                                                               '${code().codenum}')
+=======
+
+                                                        /*  .collection('RoomN')
+>>>>>>> 76783e7b5d4d87575e5f83797128a2eac5561706
                                                           .doc(
                                                               '${code().codenum}')
                                                           .set({
                                                         'number': code()
                                                             .codenum
+<<<<<<< HEAD
                                                             .toString(),
                                                         'Calendar': Press
+=======
+                                                            .toString()*/
+
+                                                          .collection('${code().codenum}')
+                                                          .doc(
+                                                              '${code().codenum}')
+                                                          .set({
+                                                        'number': code().codenum.toString(),
+                                                        'Calendar': Press
+
+>>>>>>> 76783e7b5d4d87575e5f83797128a2eac5561706
                                                       }).whenComplete(() {
                                                         print('RoomN add');
                                                         Navigator.push(
