@@ -60,10 +60,11 @@ TextStyle captionStyle(
       color: color,
       height: height);
 }
+
 // TextStyle heading5style(
 //     {bool responsible = false, double? height, Color? color}) {
 //   return TextStyle(
-//       fontSize: responsible ? 22.sp : 22,
+//       fontSize: responsible ? 22.p : 22,
 //       fontWeight: FontWeight.w600,
 //       fontFamily: 'Main',
 //       color: color,
