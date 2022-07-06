@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-//real //test에 있는 부분 
-=======
-
->>>>>>> 76783e7b5d4d87575e5f83797128a2eac5561706
 import 'dart:async';
 import 'package:provider/provider.dart';
 import 'package:zerosoda/main.dart';
@@ -393,7 +388,9 @@ class SignInState extends State<SignIn> {
                             )),
                         Padding(
                           padding: const EdgeInsets.only(top: 1.0, left: 24),
-                          child: Image.asset('assets/gray_background1.png', ),
+                          child: Image.asset(
+                            'assets/gray_background1.png',
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 145.0, top: 250),
@@ -436,7 +433,6 @@ class SignInState extends State<SignIn> {
             bottomNavigationBar: BottomNavigationBar(
               items: const <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
-                  
                   icon: Icon(Icons.home),
                   label: '홈',
                 ),

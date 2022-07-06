@@ -1,12 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
-<<<<<<< HEAD
-import 'package:zerosoda/style/fonts/font.dart';
-=======
-import '../style/font.dart';
 
->>>>>>> 76783e7b5d4d87575e5f83797128a2eac5561706
+import 'package:zerosoda/style/fonts/font.dart';
+
 //import 'package:flutter_application_1/style/font.dart';
 
 import '../screen/home.dart';
@@ -20,10 +17,6 @@ class CalendarRoomPage extends StatefulWidget {
   _CalendarRoomPageState createState() => _CalendarRoomPageState();
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 76783e7b5d4d87575e5f83797128a2eac5561706
 List<bool> press = [
   false,
   false,
@@ -243,18 +236,10 @@ class _CalendarRoomPageState extends State<CalendarRoomPage> {
                               setState(() => calendar.press[index] =
                                   !calendar.press[index]);
                               await FirebaseFirestore.instance
-<<<<<<< HEAD
-=======
-
->>>>>>> 76783e7b5d4d87575e5f83797128a2eac5561706
                                   .collection('${code().inputnum}')
                                   .doc('${code().codenum}')
                                   .set({
                                 'Calendar': calendar.press
-<<<<<<< HEAD
-=======
-
->>>>>>> 76783e7b5d4d87575e5f83797128a2eac5561706
                               }).whenComplete(() {
                                 print('make Scedule');
                                 print('${index}');
@@ -264,16 +249,9 @@ class _CalendarRoomPageState extends State<CalendarRoomPage> {
                             child: Align(
                               alignment: Alignment.topLeft,
 
-<<<<<<< HEAD
                               //     child: Press().press[index]
 
                               child: calendar.press[index]
-=======
-                         //     child: Press().press[index]
-
-                              child: calendar.press[index]
-
->>>>>>> 76783e7b5d4d87575e5f83797128a2eac5561706
                                   ? Container(
                                       child: icons(),
                                     )
