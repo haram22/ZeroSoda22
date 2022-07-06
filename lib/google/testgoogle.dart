@@ -1,4 +1,4 @@
-//real
+//real //test에 있는 부분 
 import 'dart:async';
 import 'package:provider/provider.dart';
 import 'package:zerosoda/main.dart';
@@ -368,12 +368,12 @@ class SignInState extends State<SignIn> {
                                         //Text('$index, ${press[index]}'),
                                         style: ElevatedButton.styleFrom(
                                           elevation: 0.0,
-                                          primary: press[index]
-                                              ? Colors.grey[200]
-                                              : Colors.grey[200],
                                           // primary: press[index]
-                                          //     ? Color(0xffE6EFF3)
-                                          //     : Colors.white,
+                                          //     ? Colors.grey[200]
+                                          //     : Colors.grey[200],
+                                          primary: press[index]
+                                              ? Color(0xffE6EFF3)
+                                              : Colors.white,
                                           splashFactory: NoSplash.splashFactory,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
@@ -388,8 +388,8 @@ class SignInState extends State<SignIn> {
                               ),
                             )),
                         Padding(
-                          padding: const EdgeInsets.all(130.0),
-                          child: Image.asset('assets/emoge_sad.png'),
+                          padding: const EdgeInsets.only(top: 1.0, left: 24),
+                          child: Image.asset('assets/gray_background1.png', ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 145.0, top: 250),

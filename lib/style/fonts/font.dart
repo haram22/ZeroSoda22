@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 //import 'package:flutter_screenutil/flutter_screenutil.dart';
+//screenutil 사용해서 화면별 크기 통일
 
 TextStyle titleStyle({bool responsible = false, double? height, Color? color}) {
   return TextStyle(
@@ -59,10 +60,11 @@ TextStyle captionStyle(
       color: color,
       height: height);
 }
+
 // TextStyle heading5style(
 //     {bool responsible = false, double? height, Color? color}) {
 //   return TextStyle(
-//       fontSize: responsible ? 22.sp : 22,
+//       fontSize: responsible ? 22.p : 22,
 //       fontWeight: FontWeight.w600,
 //       fontFamily: 'Main',
 //       color: color,
