@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:zerosoda/main.dart';
 import 'dart:math';
 
+import 'package:zerosoda/style/fonts/font.dart';
+
+
 //import 'package:flutter_application_1/style/font.dart';
 
 import '../screen/home.dart';
@@ -16,6 +19,7 @@ class CalendarStartPage extends StatefulWidget {
   @override
   _CalendardPageState createState() => _CalendardPageState();
 }
+
 
 List price = [
   0,
