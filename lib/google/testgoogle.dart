@@ -436,6 +436,7 @@ class SignInState extends State<SignIn> {
             bottomNavigationBar: BottomNavigationBar(
               items: const <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
+                  
                   icon: Icon(Icons.home),
                   label: '홈',
                 ),
