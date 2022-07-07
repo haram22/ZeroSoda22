@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:zerosoda/style/fonts/font.dart';
 import 'package:provider/provider.dart';
-import '../style/font.dart';
+// import '../style/font.dart';
 import 'calanar.dart';
 import '../screen/home.dart';
 import 'dart:math';
