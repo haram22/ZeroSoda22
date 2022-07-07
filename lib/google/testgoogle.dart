@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:zerosoda/main.dart';
 import '../calandar/calanar.dart';
 import '../calandar/drawer.dart';
+import '../entrance/profileEdit.dart';
 import '../screen/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -171,6 +172,18 @@ class SignInState extends State<SignIn> {
 
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
+  int selectedIndex = 0;
+  final widgetOptions = [
+    SignIn(),
+    EditProfileForm(),
+  ];
+
+  void onItemTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
   }
 
   Future<void> _handleSignOut() => _googleSignIn.disconnect(); ////
@@ -487,19 +500,6 @@ class SignInState extends State<SignIn> {
       );
     }
   }
-
-  // int _selectedIndex = 0;
-  // final List<Widget> _widgetOptions = <Widget>[
-  //   HomePage(),
-  //   CalendarPage(),
-  //   //HomePage(),
-  // ];
-  // void _onItemTapped(int index) {
-  //   // 탭을 클릭했을떄 지정한 페이지로 이동
-  //   setState(() {
-  //     _selectedIndex = index;
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
