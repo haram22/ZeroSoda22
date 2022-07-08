@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:zerosoda/main.dart';
 import 'dart:math';
 //import 'package:flutter_application_1/style/font.dart';
@@ -8,13 +9,14 @@ import '../screen/home.dart';
 import '../entrance/profileEdit.dart';
 import 'drawer.dart';
 
-class CalendarPage extends StatefulWidget {
-  const CalendarPage({Key? key}) : super(key: key);
+class MYCalendarPage extends StatefulWidget {
+  const MYCalendarPage({Key? key}) : super(key: key);
 
   @override
-  _CalendarPageState createState() => _CalendarPageState();
+  _CalendarmyPageState createState() => _CalendarmyPageState();
 }
-
+GoogleSignInAccount? _currentUser;
+final GoogleSignInAccount? user = _currentUser;
 List price = [
   0,
   0,
@@ -143,7 +145,7 @@ List<bool> press = [
   false
 ];
 
-class _CalendarPageState extends State<CalendarPage> {
+class _CalendarmyPageState extends State<MYCalendarPage> {
   int _count = Random().nextInt(8999) + 1000;
   @override
   Widget build(BuildContext context) {
@@ -250,8 +252,8 @@ class _CalendarPageState extends State<CalendarPage> {
 
                    onPressed: () async{
                      await FirebaseFirestore.instance
-                                      .collection('CalendarRoom')
-                                    .doc('${code().codenum}')
+                                      .collection('User')
+                                    .doc('${user}')
                                       .set({
                                         'Calendar': press                                       
                                       } 

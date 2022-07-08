@@ -208,7 +208,7 @@ class _MainHomePageState extends State<MainHomePage> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          CalendarPage()),
+                                                          CalendarStartPage()),
                                                 );
                                               });
                                             },
