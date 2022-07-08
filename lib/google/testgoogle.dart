@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:provider/provider.dart';
 import 'package:zerosoda/main.dart';
+import '../calandar/MYcalandar.dart';
 import '../calandar/calanar.dart';
 import '../calandar/drawer.dart';
 import '../entrance/profileEdit.dart';
@@ -428,7 +429,7 @@ class SignInState extends State<SignIn> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => MainPage()));
+                                          builder: (context) => MYCalendarPage()));
                                 });
                               },
                               child: Text('시간표 추가하기',

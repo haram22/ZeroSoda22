@@ -7,8 +7,8 @@ import '../screen/home.dart';
 import 'dart:math';
 import '../google/testgoogle.dart';
 
-class DrawerPage extends StatelessWidget {
-  const DrawerPage({Key? key}) : super(key: key);
+class DrawerkkPage extends StatelessWidget {
+  const DrawerkkPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
