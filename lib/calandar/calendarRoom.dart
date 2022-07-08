@@ -4,9 +4,6 @@ import 'package:zerosoda/main.dart';
 import 'dart:math';
 
 import 'package:zerosoda/style/fonts/font.dart';
-
-//import 'package:flutter_application_1/style/font.dart';
-
 import '../screen/home.dart';
 import '../entrance/profileEdit.dart';
 import 'drawer.dart';
