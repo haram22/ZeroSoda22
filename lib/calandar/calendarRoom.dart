@@ -3,8 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:zerosoda/main.dart';
 import 'dart:math';
+
 //import 'package:flutter_application_1/style/font.dart';
 
+
+import 'package:zerosoda/style/fonts/font.dart';
 import '../screen/home.dart';
 import '../entrance/profileEdit.dart';
 import '../style/fonts/font.dart';
