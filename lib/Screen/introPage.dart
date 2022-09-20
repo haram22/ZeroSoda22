@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter_application_1/entrance/profile.dart';
 import 'package:intro_slider/intro_slider.dart';
-import 'package:intro_slider/dot_animation_enum.dart';
 import 'package:intro_slider/slide_object.dart';
-import 'package:intro_slider/scrollbar_behavior_enum.dart';
-import 'package:zerosoda/entrance/profile.dart';
-import '../google/testgoogle.dart';
-// import '../google/whygoogle.dart';
-import '../calandar/count.dart';
-// import '../google/google.dart';
+import 'package:zerosoda/Auth/auth_service.dart';
+import 'package:zerosoda/Screen/LoginPage.dart';
 
+// 로그인 전 시작 화면
 class IntroScreen extends StatefulWidget {
   IntroScreen({Key? key}) : super(key: key);
 
@@ -57,9 +52,10 @@ class IntroScreenState extends State<IntroScreen> {
   }
 
   void onDonePress() {
+    
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SignIn()),
+      MaterialPageRoute(builder: (context) => LoginPage()),
     );
   }
 

@@ -24,7 +24,7 @@ TextStyle subtitleStyle(
 TextStyle buttonStyle(
     {bool responsible = false, double? height, Color? color}) {
   return TextStyle(
-      fontSize: 16,
+      fontSize: 15,
       fontWeight: FontWeight.w500,
       fontFamily: 'medium',
       color: color,
