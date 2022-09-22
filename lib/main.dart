@@ -8,7 +8,6 @@ import 'package:zerosoda/Screen/MyCalendar.dart';
 import 'package:zerosoda/Service/User/user_provider.dart';
 import 'package:zerosoda/Service/ender_code_provider.dart';
 
-////
 //test//
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
