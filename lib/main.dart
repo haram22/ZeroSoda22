@@ -45,10 +45,10 @@ class MyApp extends StatelessWidget {
           color: Colors.blue,
           theme: ThemeData(),
           home: CustomSplash(
-            imagePath: 'assets/LOGO.jpg',
+            imagePath: 'assets/logo_final.png',
             backGroundColor: Colors.white,
             animationEffect: 'zoom-in',
-            logoSize: 400,
+            logoSize: 50,
             home: AuthService().handleAuthState(), // 로그인 유무 확인(),
             duration: 4000,
             type: CustomSplashType.StaticDuration,
