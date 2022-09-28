@@ -198,7 +198,7 @@ class _HomePageState extends State<HomePage> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         color: Colors.transparent),
-                    padding: EdgeInsets.fromLTRB(10, 50, 0, 20),
+                    padding: EdgeInsets.fromLTRB(5, 50, 0, 20),
                     child: Row(
                       children: [
                         InkWell(
@@ -208,7 +208,7 @@ class _HomePageState extends State<HomePage> {
                           child: Container(
                             child: Image.asset(
                               'assets/make_room.png',
-                              height: 250,
+                              height: 240,
                             ),
                           ),
                         ),
@@ -219,7 +219,7 @@ class _HomePageState extends State<HomePage> {
                           child: Container(
                             child: Image.asset(
                               'assets/join_room.png',
-                              height: 250,
+                              height: 240,
                             ),
                           ),
                         ),
