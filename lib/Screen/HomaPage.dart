@@ -10,6 +10,8 @@ import 'package:zerosoda/style/Button/ButtonStyle.dart';
 import 'package:zerosoda/style/Widget/Widget.dart';
 import 'package:zerosoda/style/fonts/font.dart';
 
+import 'MyCalendar.dart';
+
 int number = Random().nextInt(8999) + 1000;
 final TextEditingController inputController = TextEditingController();
 
@@ -100,9 +102,6 @@ class _HomePageState extends State<HomePage> {
         ),
         bottomNavigationBar: BottomAppBar(
           elevation: 10,
-
-          // shape: CircularNotchedRectangle(),
-          // notchMargin: 5,
           child: Row(
             //children inside bottom appbar
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -195,7 +194,7 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         InkWell(
                           onTap: () {
-                            _endterRoomDialog();
+                            _makeroomDialog();
                           },
                           child: Container(
                             child: Image.asset(
@@ -215,44 +214,147 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                        // IconButton(
-
-                        //     onPressed: () {
-                        //       _intetRoomDialog();
-                        //     },
-                        //     icon: Image.asset(
-                        //       'assets/Make_room_button.png',
-                        //       height: 400,
-                        //     )),
-                        // MyWidget().MakeRoomButton(),
                       ],
                     ),
                   ),
-                  // Positioned(
-                  //     top: -100,
-                  //     child: Image.network("https://i.imgur.com/2yaf2wb.png",
-                  //         width: 150, height: 150))
                 ],
               ));
-          //   AlertDialog(
-          //     backgroundColor: Colors.red,
-          //     content: Row(
-          //       children: [
-          //         IconButton(
-          //             onPressed: () {
-          //               _intetRoomDialog();
-          //             },
-          //             icon: Image.asset(
-          //               'assets/Make_room_button.png',
-          //               height: 100,
-          //               width: 145,
-          //             )),
-          //         MyWidget().MakeRoomButton(),
-          //       ],
-          //     ),
-          //   );
-          // },
         });
+  }
+
+  Future<void> _endterRoomDialog() async {
+    // 방 생성시 코드 생성 및 방 생성
+    await showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          alignment: Alignment.center,
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                '참여하기',
+                style: titleStyle(),
+              ),
+              Text('팀장에게 공유받은 참여코드를 입력해주세요.', style: smallTextStyle()),
+              Container(
+                  padding: EdgeInsets.only(top: 21, bottom: 21),
+                  height: 60,
+                  width: 248,
+                  margin: EdgeInsets.only(top: 20, bottom: 20),
+                  decoration:
+                      BoxDecoration(border: Border.all(color: Colors.yellow)),
+                  child: Text('${code().codenum}',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center)),
+              ElevatedButton(
+                onPressed: () {
+                  MakingRoom('${code().codenum}');
+                },
+                style: usuallyButton(),
+                child: Container(
+                    height: 30,
+                    width: 99,
+                    child: Center(child: Text('확인', style: smallTextStyle()))),
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _makeroomDialog() async {
+    await showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+              alignment: Alignment.center,
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    '참여코드',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    '팀원들에게 코드를 공유해주세요..',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 21, bottom: 21),
+                    height: 63,
+                    width: 248,
+                    margin: EdgeInsets.only(top: 20, bottom: 20),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Color(0xffFFC700), width: 2)),
+                    child: Text(
+                      '${code().codenum}',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  SizedBox(height: 3),
+                  ElevatedButton(
+                    onPressed: () async {
+                      // _makecode
+                      await FirebaseFirestore.instance
+                          .collection('RoomN')
+                          .doc('${code().codenum}')
+                          .set({
+                        'number': code().codenum.toString()
+                      }).whenComplete(() {
+                        print('RoomN add');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MyCalendar()),
+                        );
+                      });
+                    },
+                    // onPressed: () {
+                    //   FirebaseFirestore.instance
+                    //       .collection('CalendarRooms')
+                    //       .doc('${code().inputnum}')
+                    //       .get()
+                    //       .then((doc) async {
+                    //     print('${code().inputnum}');
+                    //     if (!doc.exists) {
+                    //       return print(
+                    //           "입력 코드 : ${code().inputnum} \n 입력된 번호가 틀렸습니다.");
+                    //     } else {
+                    //       print('방에 입장합니다.');
+                    //     }
+                    //   });
+                    // },
+                    style: usuallyButton(),
+                    child: Container(
+                        height: 45,
+                        width: 82,
+                        child:
+                            Center(child: Text('확인', style: subtitleStyle()))),
+                  )
+                  // TextButton(
+                  // onPressed: () async {
+                  //   // _makecode
+                  //   await FirebaseFirestore.instance
+                  //       .collection('RoomN')
+                  //       .doc('${code().codenum}')
+                  //       .set({
+                  //     'number': code().codenum.toString()
+                  //   }).whenComplete(() {
+                  //     print('RoomN add');
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(builder: (context) => MyCalendar()),
+                  //     );
+                  //   });
+                  // },
+                  //   style: ElevatedButton.styleFrom(),
+                  //   child: Text('확인'),
+                  // )
+                ],
+              ),
+            ));
   }
 
   Future<void> _intetRoomDialog() async {
@@ -298,9 +400,9 @@ class _HomePageState extends State<HomePage> {
                 },
                 style: usuallyButton(),
                 child: Container(
-                    height: 30,
-                    width: 99,
-                    child: Center(child: Text('확인', style: smallTextStyle()))),
+                    height: 45,
+                    width: 82,
+                    child: Center(child: Text('확인', style: subtitleStyle()))),
               )
             ],
           ),
@@ -308,47 +410,4 @@ class _HomePageState extends State<HomePage> {
       },
     );
   }
-   Future<void> _endterRoomDialog() async { 
-    // 방 생성시 코드 생성 및 방 생성
-    await showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          alignment: Alignment.center,
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                '참여하기',
-                style: titleStyle(),
-              ),
-              Text('팀장에게 공유받은 참여코드를 입력해주세요.', style: smallTextStyle()),
-              Container(
-                padding: EdgeInsets.only(
-                  top: 21, bottom: 21),
-                  height: 60,
-                  width: 248,
-                  margin: EdgeInsets.only(
-                    top: 20, bottom: 20),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color:Colors.yellow)),
-                        child: Text('${code().codenum}',style: TextStyle( fontWeight: FontWeight.bold), textAlign: TextAlign.center)),
-              ElevatedButton(
-                onPressed: () {
-                  MakingRoom('${code().codenum}');
-                },
-                style: usuallyButton(),
-                child: Container(
-                    height: 30,
-                    width: 99,
-                    child: Center(child: Text('확인', style: smallTextStyle()))),
-              )
-            ],
-          ),
-        );
-      },
-    );
-   }
 }
-
