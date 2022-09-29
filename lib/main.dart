@@ -46,11 +46,13 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(),
           home: CustomSplash(
             imagePath: 'assets/logo_final.png',
+
             backGroundColor: Colors.white,
             animationEffect: 'zoom-in',
-            logoSize: 50,
+            logoSize: 5,
+
             home: AuthService().handleAuthState(), // 로그인 유무 확인(),
-            duration: 4000,
+            duration: 3000,
             type: CustomSplashType.StaticDuration,
           ),
         ));
