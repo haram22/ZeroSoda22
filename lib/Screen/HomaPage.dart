@@ -98,14 +98,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        // floatingActionButton: FloatingActionButton(
-        //     backgroundColor: Color(0xff005A85),
-        //     child: Icon(Icons.add, color: Colors.white),
-        //     onPressed: () => _showMyDialog()
-        //     // onPressed: (){},
-        //     ),
-        // floatingActionButtonLocation:
-        //     FloatingActionButtonLocation.centerDocked, // 위치 설정
         bottomNavigationBar: BottomAppBar(
           elevation: 10,
 
@@ -203,7 +195,7 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         InkWell(
                           onTap: () {
-                            _intetRoomDialog();
+                            _endterRoomDialog();
                           },
                           child: Container(
                             child: Image.asset(
@@ -316,4 +308,47 @@ class _HomePageState extends State<HomePage> {
       },
     );
   }
+   Future<void> _endterRoomDialog() async { 
+    // 방 생성시 코드 생성 및 방 생성
+    await showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          alignment: Alignment.center,
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                '참여하기',
+                style: titleStyle(),
+              ),
+              Text('팀장에게 공유받은 참여코드를 입력해주세요.', style: smallTextStyle()),
+              Container(
+                padding: EdgeInsets.only(
+                  top: 21, bottom: 21),
+                  height: 60,
+                  width: 248,
+                  margin: EdgeInsets.only(
+                    top: 20, bottom: 20),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color:Colors.yellow)),
+                        child: Text('${code().codenum}',style: TextStyle( fontWeight: FontWeight.bold), textAlign: TextAlign.center)),
+              ElevatedButton(
+                onPressed: () {
+                  MakingRoom('${code().codenum}');
+                },
+                style: usuallyButton(),
+                child: Container(
+                    height: 30,
+                    width: 99,
+                    child: Center(child: Text('확인', style: smallTextStyle()))),
+              )
+            ],
+          ),
+        );
+      },
+    );
+   }
 }
+
