@@ -142,6 +142,14 @@ MakingMyCalendar(press,price) async{
        print('make my scaduleFirst');
          });
 }
+MakingRoom(inputNum) async {
+  await FirebaseFirestore.instance.collection('Room').doc(inputNum).set({
+     '${inputNum}': inputNum,
+     }).whenComplete(() {
+       print('방 만들기 성공');
+         });
+}
+
 
 
 
